@@ -1,0 +1,72 @@
+---
+- name: "PULL DATA AND RENDER CONFIGS"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: "API CALL TO GET DEVICE ATTRIBUTES"
+      ansible.builtin.uri:
+        url: "http://192.168.2.201:8000/api/devices"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: api_response_devices
+
+    - name: "API CALL TO GET ACLs"
+      ansible.builtin.uri:
+        url: "http://192.168.2.201:8000/api/acls"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: api_response_acls
+
+    - name: "API CALL TO GET SERVICES"
+      ansible.builtin.uri:
+        url: "http://192.168.2.201:8000/api/services"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: api_response_services
+
+    - name: "GENERATE DEVICE INVENTORY"
+      ansible.builtin.add_host:
+        name: "{{ device['hostname'] }}"
+        ansible_host: "{{ device['ipv4_host'] | ansible.utils.ipaddr('address') }}"
+        ansible_user: "admin"
+        ansible_password: "admin"
+        groups: "eos"
+        ansible_network_os: "{{ device['os'] }}"
+        acls: "{{ api_response_acls['json'] }}"
+        services: "{{ api_response_services['json'] }}"
+        attributes: "{{ device }}"
+      loop: "{{ api_response_devices['json'] }}"
+      loop_control:
+        loop_var: device
+        label: "{{ device['hostname'] }}"
+      when:
+        - ( device['os'] == 'arista.eos.eos' )
+        - ( device['fabric_id'] == '11' )
+
+- name: "RENDER DEVICE CONFIGS"
+  hosts: "eos"
+  connection: "network_cli"
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: "RENDER CONFIGS"
+      ansible.builtin.template:
+        src: "templates/eos/config.j2"
+        dest: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
+
+    - name: "DELETE CURRENT ACLs"
+      arista.eos.eos_config:
+        lines:
+          - "no ip access-list mgmt"
+          - "no ip access-list snmp_80"
+
+    - name: "APPLY CONFIG TO THE DEVICES"
+      arista.eos.eos_config:
+        src: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
+        save_when: "modified"
