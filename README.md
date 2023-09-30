@@ -1,2 +1,2 @@
 # iac_network_deployment
-Ansible Playbooks to Manage SoT 
+Ansible Playbooks to Manage SoT

@@ -29,6 +29,14 @@
         body_format: json
       register: api_response_services
 
+    - name: "API CALL TO GET PROTOCOLS"
+      ansible.builtin.uri:
+        url: "http://192.168.2.201:8000/api/protocols"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: api_response_protocols
+
     - name: "GENERATE DEVICE INVENTORY"
       ansible.builtin.add_host:
         name: "{{ device['hostname'] }}"
@@ -39,6 +47,7 @@
         ansible_network_os: "{{ device['os'] }}"
         acls: "{{ api_response_acls['json'] }}"
         services: "{{ api_response_services['json'] }}"
+        protocols: "{{ api_response_protocols['json'] }}"
         attributes: "{{ device }}"
       loop: "{{ api_response_devices['json'] }}"
       loop_control:
@@ -54,25 +63,7 @@
   gather_facts: false
 
   tasks:
-    - name: "RENDER CONFIGS"
+    - name: "RENDER EDGE DEVICE FULL CONFIG"
       ansible.builtin.template:
-        src: "templates/ios/config.j2"
+        src: "templates/ios/edge_config.j2"
         dest: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
-
-    # - name: "DELETE CURRENT ACLs"
-    #   cisco.ios.ios_config:
-    #     lines:
-    #       - "no ip access-list extended mgmt"
-    #       - "no ip access-list extended snmp_80"
-
-    # - name: "APPLY CONFIG TO THE DEVICES"
-    #   cisco.ios.ios_config:
-    #     src: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
-    #     save_when: "modified"
-
-    - name: "APPLY CONFIG"
-      napalm.napalm.napalm_install_config:
-        dev_os: "ios"
-        config_file: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
-        commit_changes: true
-        replace_config: false

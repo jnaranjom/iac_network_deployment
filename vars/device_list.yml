@@ -2,23 +2,11 @@
 devices:
   - vendor: cisco
     model: csr
-    ipv4_host: 192.168.2.237/24
-    hostname: edge03
+    ipv4_host: 192.168.2.240/24
+    hostname: edge05
     role:
       name: edge
-      id: "03"
-    asset_class: ip_router
-    os: cisco.ios.ios
-    site: lab01
-    fabric_id: ""
-
-  - vendor: cisco
-    model: csr
-    ipv4_host: 192.168.2.239/24
-    hostname: edge04
-    role:
-      name: edge
-      id: "04"
+      id: "05"
     asset_class: ip_router
     os: cisco.ios.ios
     site: lab01

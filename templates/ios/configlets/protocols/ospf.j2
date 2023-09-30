@@ -1,0 +1,9 @@
+!
+{% for protocol in protocols %}
+{% if protocol['name'] == 'ospf' and protocol['version'] == '0.0.1' and protocol['scope'] == 'edge' %}
+router ospf {{ protocol['attributes']['process_id'] }}
+ router-id {{ protocol['attributes']['router_id'] }}
+ prefix-suppression
+{% endif %}
+{% endfor %}
+!

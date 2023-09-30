@@ -23,42 +23,42 @@
     #   ansible.builtin.debug:
     #     msg: "{{ api_response_locations }}"
 
-    # - name: "INCLUDE VAR FILES"
-    #   ansible.builtin.include_vars: "vars/acls.yml"
+    - name: "INCLUDE VAR FILES"
+      ansible.builtin.include_vars: "vars/acls.yml"
 
-    # - name: "API CALL TO ADD ACL"
-    #   ansible.builtin.uri:
-    #     url: "http://127.0.0.1:8000/api/acls"
-    #     method: POST
-    #     body: "{{ acl }}"
-    #     status_code: 201
-    #     body_format: json
-    #   register: api_response_acls
-    #   loop: "{{ new_acl }}"
-    #   loop_control:
-    #     loop_var: "acl"
-    #     label: "{{ acl['name'] }}"
+    - name: "API CALL TO ADD ACL"
+      ansible.builtin.uri:
+        url: "http://192.168.2.201:8000/api/acls"
+        method: POST
+        body: "{{ acl }}"
+        status_code: 201
+        body_format: json
+      register: api_response_acls
+      loop: "{{ new_acl }}"
+      loop_control:
+        loop_var: "acl"
+        label: "{{ acl['name'] }}"
 
-    # - name: "DEBUG RESULTS"
-    #   ansible.builtin.debug:
-    #     msg: "{{ api_response_acls }}"
+    - name: "DEBUG RESULTS"
+      ansible.builtin.debug:
+        msg: "{{ api_response_acls }}"
 
     - name: "INCLUDE VAR FILES"
       ansible.builtin.include_vars: "vars/device_list.yml"
 
-    - name: "API CALL TO ADD NEW DEVICES"
-      ansible.builtin.uri:
-        url: "http://127.0.0.1:8000/api/devices"
-        method: POST
-        body: "{{ device }}"
-        status_code: 201
-        body_format: json
-      loop: "{{ devices }}"
-      loop_control:
-        loop_var: "device"
-        label: "{{ device['hostname'] }}"
-      register: api_response_devices
+    # - name: "API CALL TO ADD NEW DEVICES"
+    #   ansible.builtin.uri:
+    #     url: "http://192.168.2.201:8000/api/devices"
+    #     method: POST
+    #     body: "{{ device }}"
+    #     status_code: 201
+    #     body_format: json
+    #   loop: "{{ devices }}"
+    #   loop_control:
+    #     loop_var: "device"
+    #     label: "{{ device['hostname'] }}"
+    #   register: api_response_devices
 
-    - name: "DEBUG RESULTS"
-      ansible.builtin.debug:
-        msg: "{{ api_response_devices }}"
+    # - name: "DEBUG RESULTS"
+    #   ansible.builtin.debug:
+    #     msg: "{{ api_response_devices }}"
