@@ -1,0 +1,15 @@
+---
+- name: "PULL DATA AND RENDER CONFIGS"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: "API CALL TO GET LOCATIONS"
+      ansible.builtin.include_tasks: "tasks/task_get_locations.yml"
+
+    - name: "API CALL TO GET PROTOCOLS"
+      ansible.builtin.include_tasks: "tasks/task_get_protocols.yml"
+
+    - name: "API CALL TO GET DEVICES"
+      ansible.builtin.include_tasks: "tasks/task_get_devices.yml"
