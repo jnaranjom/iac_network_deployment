@@ -1,7 +1,7 @@
 ---
 - name: "API CALL TO GET DEVICES"
   ansible.builtin.uri:
-    url: "http://192.168.2.201:8000/api/devices"
+    url: "{{ api_url }}/api/devices"
     method: GET
     status_code: 200
     body_format: json

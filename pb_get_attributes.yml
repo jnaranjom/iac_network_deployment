@@ -4,6 +4,9 @@
   connection: local
   gather_facts: false
 
+  vars:
+    api_url: "http://192.168.2.201:8000"
+
   tasks:
     - name: "API CALL TO GET LOCATIONS"
       ansible.builtin.include_tasks: "tasks/task_get_locations.yml"

@@ -1,0 +1,17 @@
+---
+- name: "API CALL TO ADD ACLS"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/acls"
+    method: POST
+    body: "{{ acl }}"
+    status_code: 201
+    body_format: json
+  loop: "{{ acls }}"
+  loop_control:
+    loop_var: "acl"
+    label: "{{ acl['name'] }}"
+  register: api_response_acls
+
+- name: "DEBUG RESULTS"
+  ansible.builtin.debug:
+    msg: "{{ api_response_acls }}"

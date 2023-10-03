@@ -1,7 +1,7 @@
 ---
-new_acl:
+acls:
   - name: mgmt
-    version: "0.0.4"
+    version: "0.0.2"
     entries:
       - action: permit
         destination: any
@@ -63,5 +63,15 @@ new_acl:
         remark: ""
         sn: ""
         source: 192.168.3.0/24
+      - action: permit
+        destination: "10.10.0.0/16"
+        modifier: ""
+        name: mgmt
+        port: ""
+        protocol: tcp
+        range: ""
+        remark: ""
+        sn: ""
+        source: 192.168.23.0/24
     environment: all
     site: all
