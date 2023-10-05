@@ -13,22 +13,6 @@
         body_format: json
       register: api_response_devices
 
-    - name: "API CALL TO GET ACLs"
-      ansible.builtin.uri:
-        url: "http://192.168.2.201:8000/api/acls"
-        method: GET
-        status_code: 200
-        body_format: json
-      register: api_response_acls
-
-    - name: "API CALL TO GET SERVICES"
-      ansible.builtin.uri:
-        url: "http://192.168.2.201:8000/api/services"
-        method: GET
-        status_code: 200
-        body_format: json
-      register: api_response_services
-
     - name: "GENERATE DEVICE INVENTORY"
       ansible.builtin.add_host:
         name: "{{ device['hostname'] }}"
@@ -37,8 +21,6 @@
         ansible_password: "admin"
         groups: "edge"
         ansible_network_os: "{{ device['os'] }}"
-        acls: "{{ api_response_acls['json'] }}"
-        services: "{{ api_response_services['json'] }}"
         attributes: "{{ device }}"
       loop: "{{ api_response_devices['json'] }}"
       loop_control:
@@ -46,33 +28,28 @@
         label: "{{ device['hostname'] }}"
       when:
         - ( device['role']['name'] == 'edge')
-        - (device['model'] == 'csr' )
+        - ( device['model'] == 'csr1000v' )
 
 - name: "RENDER DEVICE CONFIGS"
   hosts: "edge"
   connection: "network_cli"
   gather_facts: false
 
+  vars:
+    api_url: "http://192.168.2.201:8000"
+
   tasks:
+    - name: "GATHER DEVICE ATTRIBUTES"
+      ansible.builtin.include_tasks: "tasks/task_device_attributes.yml"
+
     - name: "RENDER CONFIGS"
       ansible.builtin.template:
-        src: "templates/ios/config.j2"
-        dest: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
-
-    # - name: "DELETE CURRENT ACLs"
-    #   cisco.ios.ios_config:
-    #     lines:
-    #       - "no ip access-list extended mgmt"
-    #       - "no ip access-list extended snmp_80"
-
-    # - name: "APPLY CONFIG TO THE DEVICES"
-    #   cisco.ios.ios_config:
-    #     src: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
-    #     save_when: "modified"
+        src: "templates/ios/edge_config.j2"
+        dest: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
 
     - name: "APPLY CONFIG"
       napalm.napalm.napalm_install_config:
         dev_os: "ios"
-        config_file: "configs/{{ attributes['site'] }}-{{ inventory_hostname }}.cfg"
+        config_file: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
         commit_changes: true
         replace_config: false

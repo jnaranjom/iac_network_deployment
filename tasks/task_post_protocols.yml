@@ -1,0 +1,17 @@
+---
+- name: "API CALL TO ADD NEW PROTOCOL"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/protocols"
+    method: POST
+    body: "{{ protocol }}"
+    status_code: 201
+    body_format: json
+  loop: "{{ protocols }}"
+  loop_control:
+    label: "{{ protocol['name'] }}"
+    loop_var: "protocol"
+  register: api_response_protocols
+
+- name: "DEBUG RESULTS"
+  ansible.builtin.debug:
+    msg: "{{ api_response_protocols }}"

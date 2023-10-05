@@ -1,25 +1,31 @@
 ---
 devices:
   - vendor: cisco
-    model: csr
-    ipv4_host: 192.168.2.240/24
-    hostname: edge01
-    role:
-      name: edge
-      id: "01"
-    asset_class: ip_router
-    os: cisco.ios.ios
-    site: lab01
-    fabric_id: ""
-
-  - vendor: cisco
-    model: csr
-    ipv4_host: 192.168.2.240/24
+    model: csr1000v
+    serial_number: ABCDEFGHJ
+    ipv4_host: 192.168.2.239/24
     hostname: edge02
     role:
       name: edge
       id: "02"
     asset_class: ip_router
+    asset_id: "123457"
+    environment: dev
+    type: virtual
     os: cisco.ios.ios
-    site: lab01
+    location:
+      name: site01
+      id: 6510edf5c427b184028d642c
     fabric_id: ""
+    services:
+      - name: ntp
+        id: 651c457435114b4d8239473c
+    protocols:
+      - name: bgp
+        id: 6510edf5c427b184028d642b
+    interfaces:
+      - name: lab01-edge01
+        id: 651f18f76b47214e6c1b3f2e
+    acls:
+      - name: mgmt
+        id: 651c443104e4fff54121780f

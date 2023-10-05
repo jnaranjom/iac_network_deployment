@@ -1,0 +1,17 @@
+---
+- name: "API CALL TO ADD NEW INTERFACES"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/interfaces"
+    method: POST
+    body: "{{ interface_list }}"
+    status_code: 201
+    body_format: json
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ interface_list['name'] }}"
+    loop_var: "interface_list"
+  register: api_response_interfaces
+
+- name: "DEBUG RESULTS"
+  ansible.builtin.debug:
+    msg: "{{ api_response_interfaces }}"

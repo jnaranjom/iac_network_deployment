@@ -1,0 +1,16 @@
+---
+protocols:
+  - name: bgp
+    version: 0.0.1
+    attributes:
+      router_id: loopback0
+      vrf: default
+      log_neighbor_changes: true
+      asn: "65000"
+    environment: dev
+    scope: "core"
+    aggregate_networks:
+      - network: 192.168.1.0/24
+        summary_only: "true"
+    networks:
+      - 192.168.10.0/24

@@ -1,8 +1,4 @@
-{% for acl in acls %}
-{% if acl['name'] == 'mgmt' and acl['version'] == '0.0.3' %}
-ip access-list extended {{ acl['name'] }}
-{% for entry in acl['entries'] %}
-    {{ loop.index * 5 }} {{ entry['action'] }} {{ entry['protocol'] }} {{ entry['source'] | ansible.utils.ipaddr('network') }} {{ entry['source'] | ansible.utils.ipaddr('hostmask') }}  {{ entry['destination'] }}
-{% endfor %}
-{% endif %}
+ip access-list extended {{ device_acls['json']['name'] }}
+{% for entry in device_acls['json']['entries'] %}
+    {{ loop.index * 5 }} {{ entry['action'] }} {{ entry['protocol'] }} {{ entry['source'] | ansible.utils.ipaddr('network') }} {{ entry['source'] | ansible.utils.ipaddr('hostmask') }} {{ entry['destination'] }}
 {% endfor %}

@@ -1,45 +1,13 @@
-interface Loopback0
+{% for interface in device_interfaces['json']['interfaces'] %}
+interface {{ interface['name'] }}{{ interface['port'] }}
+ description {{ interface['description'] }}
+{% if interface['ipv4_prefix'] is not none %}
+ ip address {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('address') }} {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('netmask') }}
+{% endif %}
+{% if not interface['shutdown'] %}
  no shutdown
- ip address 10.5.0.5 255.255.255.255
- ip pim sparse-mode
- ip ospf 10 area 0
-!
-interface Loopback192
- no shutdown
- ip address 192.168.5.1 255.255.255.0
-!
-interface GigabitEthernet0/0
- no shutdown
- ip address 10.5.250.11 255.255.255.254
- ip pim sparse-mode
- ip ospf 10 area 0
- duplex auto
- speed auto
- media-type rj45
-!
-interface GigabitEthernet0/1
- no shutdown
- ip address 10.5.250.15 255.255.255.254
- ip pim sparse-mode
- ip ospf 10 area 0
- duplex auto
- speed auto
- media-type rj45
-!
-interface GigabitEthernet0/2
- no shutdown
- no ip address
- ip pim sparse-mode
+{% else %}
  shutdown
- duplex auto
- speed auto
- media-type rj45
+{% endif %}
 !
-interface GigabitEthernet0/3
- no shutdown
- no ip address
- ip pim sparse-mode
- shutdown
- duplex auto
- speed auto
- media-type rj45
+{% endfor %}

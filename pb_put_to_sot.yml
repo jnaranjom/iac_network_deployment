@@ -1,0 +1,24 @@
+---
+- name: "ADD NEW ITEMS TO NETWORK SOT"
+  hosts: localhost
+  connection: local
+  gather_facts: true
+
+  vars:
+    api_url: "http://192.168.2.201:8000"
+
+  tasks:
+    - name: "INCLUDE VARIABLE FILES"
+      ansible.builtin.include_vars: "vars/update_location.yml"
+
+    - name: "ADD NEW LOCATIONS TO SOT"
+      ansible.builtin.include_tasks: "tasks/task_put_location.yml"
+
+    # - name: "ADD NEW DEVICES TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_devices.yml"
+
+    # - name: "ADD NEW ACLS TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_acls.yml"
+
+    # - name: "ADD NEW SERVICES TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_services.yml"

@@ -1,0 +1,40 @@
+---
+- name: "READ DEVICE SPECIFIC ATTRIBUTES | INTERFACES"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/interfaces/{{ attributes['interfaces'][0]['id'] }}"
+    method: GET
+    status_code: 200
+    body_format: json
+  register: device_interfaces
+
+- name: "READ DEVICE SPECIFIC ATTRIBUTES | SERVICES"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/services/{{ attributes['services'][0]['id'] }}"
+    method: GET
+    status_code: 200
+    body_format: json
+  register: device_services
+
+- name: "READ DEVICE SPECIFIC ATTRIBUTES | LOCATIONS"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/locations/{{ attributes['locations'][0]['id'] }}"
+    method: GET
+    status_code: 200
+    body_format: json
+  register: device_locations
+
+- name: "READ DEVICE SPECIFIC ATTRIBUTES | ACLS"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/acls/{{ attributes['acls'][0]['id'] }}"
+    method: GET
+    status_code: 200
+    body_format: json
+  register: device_acls
+
+- name: "READ DEVICE SPECIFIC ATTRIBUTES | PROTOCOLS"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/protocols/{{ attributes['protocols'][0]['id'] }}"
+    method: GET
+    status_code: 200
+    body_format: json
+  register: device_protocols

@@ -18,8 +18,14 @@
     # - name: "ADD NEW DEVICES TO SOT"
     #   ansible.builtin.include_tasks: "tasks/task_post_devices.yml"
 
-    - name: "ADD NEW ACLS TO SOT"
-      ansible.builtin.include_tasks: "tasks/task_post_acls.yml"
+    # - name: "ADD NEW INTERFACES TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_interfaces.yml"
+
+    # - name: "ADD NEW ACLS TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_acls.yml"
+
+    # - name: "ADD NEW SERVICES TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_services.yml"
 
     - name: "ADD NEW SERVICES TO SOT"
-      ansible.builtin.include_tasks: "tasks/task_post_services.yml"
+      ansible.builtin.include_tasks: "tasks/task_post_protocols.yml"
