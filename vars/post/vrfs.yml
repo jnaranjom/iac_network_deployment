@@ -1,7 +1,7 @@
 ---
-vrfs:
+endpoint_list:
   - name: default
-    version: "0.0.1"
+    version: "0.0.2"
     export_route_policy: "null"
     export_rt: "null"
     import_route_policy: "null"

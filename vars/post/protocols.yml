@@ -1,0 +1,11 @@
+---
+endpoint_list:
+  - name: ospf
+    version: "0.0.2"
+    attributes:
+      router_id: "loopback0"
+      process_id: "10"
+      area: "0"
+      vrf: default
+    environment: dev
+    scope: "core"

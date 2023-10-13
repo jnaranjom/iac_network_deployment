@@ -1,0 +1,25 @@
+---
+- name: "PLAY - GET ITEMS FROM NETWORK SOT"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    api_url: "http://192.168.2.201:8000"
+
+  tasks:
+    - name: "TASK GET ENDPOINTS OBJECTS IN SOT"
+      ansible.builtin.include_role:
+        name: "ansible_role_sot_operations"
+        tasks_from: "task_get_request"
+      loop:
+        - "locations"
+        - "devices"
+        - "interfaces"
+        - "acls"
+        - "services"
+        - "protocols"
+        - "vrfs"
+        - "bgpneighbors"
+      loop_control:
+        loop_var: 'endpoint'

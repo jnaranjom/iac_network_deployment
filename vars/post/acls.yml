@@ -1,5 +1,5 @@
 ---
-acls:
+endpoint_list:
   - name: mgmt
     version: "0.0.2"
     entries:

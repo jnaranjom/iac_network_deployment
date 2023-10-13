@@ -1,7 +1,6 @@
 ---
-update_interfaces:
-  - id: 651f8726a5e098e62533d595
-    updated: "{{ ansible_date_time.iso8601 }}"
+endpoint_list:
+  - id: "651f8726a5e098e62533d595"
     name: lab01-pe02
     version: 0.0.2
     interfaces:
@@ -11,7 +10,7 @@ update_interfaces:
         speed: null
         policy_map: null
         port: "0"
-        description: ROUTER-ID
+        description: ROUTER-ID [OSPF/BGP]
         ipv4_prefix: 5.5.5.5/32
         shutdown: false
         vrf: default

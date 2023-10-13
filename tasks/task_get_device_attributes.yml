@@ -1,18 +1,24 @@
 ---
-- name: "API CALL TO GET {{ attribute['key'] | upper }}"
-  ansible.builtin.uri:
-    url: "{{ api_url }}/api/{{ attribute['key'] }}/{{ attribute_name['id'] }}"
-    method: GET
-    status_code: 200
-    body_format: json
-  register: api_response_attributes
+- name: "10: TASK GET ENDPOINTS OBJECTS IN SOT BY ID"
+  ansible.builtin.include_role:
+    name: "ansible_role_sot_operations"
+    tasks_from: "task_get_request_by_id"
+  vars:
+    endpoint: "{{ attribute['key'] }}"
+    endpoint_item:
+      id: "{{ attribute_name['id'] }}"
   loop: "{{ attribute['value'] }}"
   loop_control:
     loop_var: "attribute_name"
     label: "{{ attribute_name['name'] }}"
-  delegate_to: localhost
+  register: "api_response_attributes"
 
-- name: "SET_FACT FOR ATTRIBUTES"
+- name: "20: FROM PLAYBOOK {{ endpoint | upper }} RESPONSE"
+  ansible.builtin.debug:
+    msg: "{{ api_response_attributes }}"
+  delegate_to: "localhost"
+
+- name: "20: SET_FACT FOR DEVICE ATTRIBUTES"
   ansible.builtin.set_fact:
     "{{ attribute['key'] }}": "{{ api_response_attributes['results'] | map(attribute='json') }}"
   delegate_to: localhost

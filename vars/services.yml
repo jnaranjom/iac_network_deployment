@@ -1,7 +1,0 @@
----
-services:
-  - name: "dns"
-    version: 0.0.1
-    servers:
-      - ipv4_host: 10.0.1.7
-      - ipv4_host: 10.0.1.8

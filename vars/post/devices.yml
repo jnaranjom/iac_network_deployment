@@ -1,0 +1,38 @@
+---
+endpoint_list:
+  - vendor: cisco
+    model: csr1000v
+    serial_number: HI
+    ipv4_host: 192.168.2.55/24
+    hostname: "edge03"
+    role:
+      name: "edge"
+      id: "03"
+    asset_class: ip_router
+    asset_id: "5679"
+    environment: dev
+    type: virtual
+    os: cisco.ios.ios
+    attributes:
+      services:
+        - name: ntp
+          id: 651c457435114b4d8239473c
+        - name: dns
+          id: 6524698848f3fe822fcd6616
+      acls:
+        - name: mgmt
+          id: 651c443104e4fff54121780f
+      protocols:
+        - name: ospf
+          id: 651f8855a5e098e62533d597
+        - name: bgp
+          id: 651f32f55f35cb3f3da188cd
+      locations:
+        - name: lab01
+          id: 651ed9c9036ed8004b7c0c34
+      interfaces:
+        - name: interfaces
+          id: 6526a8948e25c3a9ef346805
+      bgp_neighbors:
+        - name: ISP01
+          id: 65247134c61673db1752d439

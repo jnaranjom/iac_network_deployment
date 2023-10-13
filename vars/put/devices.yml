@@ -1,0 +1,28 @@
+---
+endpoint_list:
+  - id: "65283c467663e61b4900ba5c"
+    attributes:
+      services:
+        - name: ntp
+          id: 651c457435114b4d8239473c
+        - name: dns
+          id: 6526e5a1fec6e35b9120b080
+        - name: aaa
+          id: 65296f68ae9f74bd90eeeb90
+      acls:
+        - name: mgmt
+          id: 651c443104e4fff54121780f
+      protocols:
+        - name: ospf
+          id: 651f8855a5e098e62533d597
+        - name: bgp
+          id: 651f36735f35cb3f3da188ce
+      locations:
+        - name: lab01
+          id: 651ed9c9036ed8004b7c0c34
+      interfaces:
+        - name: interfaces
+          id: 65246eeec61673db1752d435
+      bgpneighbors:
+        - name: ISP01
+          id: 652050658e690066c6c0c1c1

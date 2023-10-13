@@ -1,5 +1,5 @@
 ---
-interfaces:
+endpoint_list:
   - name: "lab01-edge02"
     version: "0.0.2"
     interfaces:

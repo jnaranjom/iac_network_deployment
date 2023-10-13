@@ -1,5 +1,5 @@
 ---
-- name: "PLAY - ADD NEW ITEMS TO NETWORK SOT"
+- name: "PLAY - GET ITEM FROM NETWORK SOT"
   hosts: localhost
   connection: local
   gather_facts: false
@@ -7,12 +7,10 @@
   vars:
     api_url: "http://192.168.2.201:8000"
     endpoint: "services"
+    id: "651c457435114b4d8239473c"
 
   tasks:
-    - name: "INCLUDE VARIABLE FILES"
-      ansible.builtin.include_vars: "vars/post/{{ endpoint }}.yml"
-
-    - name: "TASK - POST INTO SOT"
+    - name: "TASK GET ENDPOINTS OBJECTS IN SOT"
       ansible.builtin.include_role:
         name: "ansible_role_sot_operations"
-        tasks_from: "task_post_request"
+        tasks_from: "task_get_request_by_id"

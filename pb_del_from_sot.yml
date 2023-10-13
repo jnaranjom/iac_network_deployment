@@ -1,5 +1,5 @@
 ---
-- name: "PLAY - ADD NEW ITEMS TO NETWORK SOT"
+- name: "PLAY - UPDATE ENDPOINTS IN NETWORK SOT"
   hosts: localhost
   connection: local
   gather_facts: false
@@ -10,9 +10,9 @@
 
   tasks:
     - name: "INCLUDE VARIABLE FILES"
-      ansible.builtin.include_vars: "vars/post/{{ endpoint }}.yml"
+      ansible.builtin.include_vars: "vars/delete/{{ endpoint }}.yml"
 
-    - name: "TASK - POST INTO SOT"
+    - name: "TASK - PUT TO SOT"
       ansible.builtin.include_role:
         name: "ansible_role_sot_operations"
-        tasks_from: "task_post_request"
+        tasks_from: "task_delete_request"

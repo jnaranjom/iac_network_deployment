@@ -1,0 +1,8 @@
+---
+endpoint_list:
+  - site: "lab01"
+    address: "123 Coit Rd"
+    city: "Dallas"
+    state: "Texas"
+    zip_code: "75078"
+    country: "United States"
