@@ -167,4 +167,4 @@ configs/*
 
 # Ignore roles
 
-roles/*
+roles/ansible*
