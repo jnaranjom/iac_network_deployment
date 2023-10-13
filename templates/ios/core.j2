@@ -13,6 +13,9 @@ boot-end-marker
 no aaa new-model
 !
 !
+{#{% if attributes['vrfs'] is not none %}
+{% include 'configlets/vrfs/core/vrfs.j2' %}
+{% endif %}#}
 !
 !
 !
@@ -43,9 +46,13 @@ redundancy
 !
 !
 !
-{% include 'configlets/interfaces/interfaces.j2' %}
+{% include 'configlets/interfaces/core/interfaces.j2' %}
 !
-{% include 'configlets/protocols/bgp.j2' %}
+{#{% if attributes['bgp_neighbors'] is not none %}
+{% include 'configlets/protocols/core/bgp.j2' %}
+{% endif %}
+!
+{% include 'configlets/protocols/core/ospf.j2' %}#}
 !
 !
 !
@@ -55,6 +62,7 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip scp server enable
 !
 !
 {% include 'configlets/services/ntp.j2' %}

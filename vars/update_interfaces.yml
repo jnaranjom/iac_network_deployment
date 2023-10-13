@@ -1,0 +1,57 @@
+---
+update_interfaces:
+  - id: 651f8726a5e098e62533d595
+    updated: "{{ ansible_date_time.iso8601 }}"
+    name: lab01-pe02
+    version: 0.0.2
+    interfaces:
+      - name: Loopback
+        type: routed
+        duplex: full
+        speed: null
+        policy_map: null
+        port: "0"
+        description: ROUTER-ID
+        ipv4_prefix: 5.5.5.5/32
+        shutdown: false
+        vrf: default
+      - name: GigabitEthernet
+        type: routed
+        duplex: full
+        speed: null
+        policy_map: null
+        port: "1"
+        description: MGMT INTERFACE
+        ipv4_prefix: 192.168.2.54/24
+        shutdown: false
+        vrf: default
+      - name: GigabitEthernet
+        type: routed
+        duplex: full
+        speed: null
+        policy_map: null
+        port: "2"
+        description: CORE-PE02-P01
+        ipv4_prefix: 10.10.0.6/30
+        shutdown: false
+        vrf: default
+      - name: GigabitEthernet
+        type: routed
+        duplex: full
+        speed: null
+        policy_map: null
+        port: "3"
+        description: "CUST1 EDGE02"
+        ipv4_prefix: "10.100.0.5/30"
+        shutdown: false
+        vrf: "CUST1_VRF"
+      - name: GigabitEthernet
+        type: routed
+        duplex: full
+        speed: null
+        policy_map: null
+        port: "4"
+        description: UNUSED
+        ipv4_prefix: null
+        shutdown: true
+        vrf: default

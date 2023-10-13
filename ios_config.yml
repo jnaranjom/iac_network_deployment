@@ -1,37 +1,21 @@
 ---
-- name: "PULL DATA AND RENDER CONFIGS"
+- name: "RETRIEVE DEVICE ATTRIBUTES"
   hosts: localhost
   connection: local
   gather_facts: false
 
+  vars:
+    api_url: "http://192.168.2.201:8000"
+
   tasks:
-    - name: "API CALL TO GET DEVICE ATTRIBUTES"
-      ansible.builtin.uri:
-        url: "http://192.168.2.201:8000/api/devices"
-        method: GET
-        status_code: 200
-        body_format: json
-      register: api_response_devices
+    - name: "API CALL TO GET DEVICES"
+      ansible.builtin.include_tasks: "tasks/task_get_devices.yml"
 
-    - name: "GENERATE DEVICE INVENTORY"
-      ansible.builtin.add_host:
-        name: "{{ device['hostname'] }}"
-        ansible_host: "{{ device['ipv4_host'] | ansible.utils.ipaddr('address') }}"
-        ansible_user: "admin"
-        ansible_password: "admin"
-        groups: "edge"
-        ansible_network_os: "{{ device['os'] }}"
-        attributes: "{{ device }}"
-      loop: "{{ api_response_devices['json'] }}"
-      loop_control:
-        loop_var: device
-        label: "{{ device['hostname'] }}"
-      when:
-        - ( device['role']['name'] == 'edge')
-        - ( device['model'] == 'csr1000v' )
+    - name: "GENERATE INVENTORY"
+      ansible.builtin.include_tasks: "tasks/task_generate_inventory.yml"
 
-- name: "RENDER DEVICE CONFIGS"
-  hosts: "edge"
+- name: "RETRIEVE ATTRIBUTES PER DEVICE"
+  hosts: "devices"
   connection: "network_cli"
   gather_facts: false
 
@@ -39,17 +23,36 @@
     api_url: "http://192.168.2.201:8000"
 
   tasks:
-    - name: "GATHER DEVICE ATTRIBUTES"
-      ansible.builtin.include_tasks: "tasks/task_device_attributes.yml"
+    - name: "API CALL TO GET DEVICE ATTRIBUTES"
+      ansible.builtin.include_tasks: "tasks/task_get_device_attributes.yml"
+      loop: "{{ attributes | dict2items }}"
+      loop_control:
+        loop_var: "attribute"
+        label: "{{ attribute ['key'] }}"
 
-    - name: "RENDER CONFIGS"
+    - name: "RENDER CONFIGURATION EDGE DEVICES"
       ansible.builtin.template:
-        src: "templates/ios/edge_config.j2"
-        dest: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
+        src: "templates/ios/edge.j2"
+        dest: "configs/{{ inventory_hostname }}.cfg"
+      when: ( 'edge' in inventory_hostname )
 
-    - name: "APPLY CONFIG"
-      napalm.napalm.napalm_install_config:
-        dev_os: "ios"
-        config_file: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
-        commit_changes: true
-        replace_config: false
+    - name: "RENDER CONFIGURATION CORE DEVICES"
+      ansible.builtin.template:
+        src: "templates/ios/core.j2"
+        dest: "configs/{{ inventory_hostname }}.cfg"
+      when: ( 'p' in inventory_hostname )
+    # - name: "APPLY CONFIG"
+    #   napalm.napalm.napalm_install_config:
+    #     dev_os: "ios"
+    #     config_file: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
+    #     commit_changes: true
+    #     replace_config: false
+
+    # - name: "APPLY CONFIG"
+    #   cisco.ios.ios_config:
+    #     src: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
+
+    # - name: "DEBUG IOS COMMAND"
+    #   cisco.ios.ios_command:
+    #     commands:
+    #       - "show version"

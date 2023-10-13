@@ -1,0 +1,5 @@
+ip vrf {{ device_vrfs['json']['name'] }}
+ rd {{ device_vrfs['json']['rd'] }}
+ route-target import {{ device_vrfs['json']['import_rt'] }}
+ route-target export {{ device_vrfs['json']['export_rt'] }}
+!

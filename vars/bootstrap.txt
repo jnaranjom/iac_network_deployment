@@ -1,0 +1,112 @@
+hostname lab01_edge01
+
+ip domain name network.local
+
+username admin privilege 15 secret admin
+
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+
+line vty 0 4
+login local
+transport input ssh
+
+int gi1
+ ip address 192.168.2.50 255.255.255.0
+
+end
+
+wr mem
+
+
+__
+
+hostname lab01_edge02
+
+ip domain name network.local
+
+username admin privilege 15 secret admin
+
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+
+line vty 0 4
+login local
+transport input ssh
+
+int gi1
+ ip address 192.168.2.51 255.255.255.0
+
+end
+
+wr mem
+
+
+---
+hostname lab01_pe01
+
+ip domain name network.local
+
+username admin privilege 15 secret admin
+
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+
+line vty 0 4
+login local
+transport input ssh
+
+int gi1
+ ip address 192.168.2.52 255.255.255.0
+
+end
+
+wr mem
+
+
+---
+hostname lab01_p01
+
+ip domain name network.local
+
+username admin privilege 15 secret admin
+
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+
+line vty 0 4
+login local
+transport input ssh
+
+int gi1
+ ip address 192.168.2.53 255.255.255.0
+
+end
+
+wr mem
+
+---
+hostname lab01_pe02
+
+ip domain name network.local
+
+username admin privilege 15 secret admin
+
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+
+line vty 0 4
+login local
+transport input ssh
+
+int gi1
+ ip address 192.168.2.54 255.255.255.0
+
+end
+
+wr mem

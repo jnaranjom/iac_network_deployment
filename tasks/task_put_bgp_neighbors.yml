@@ -1,0 +1,17 @@
+---
+- name: "API CALL TO UPDATE A BGP NEIGHBORS"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/bgpneighbors/{{ bgp_neighbor['id'] }}"
+    method: PUT
+    body: "{{ bgp_neighbor }}"
+    status_code: 200
+    body_format: json
+  loop: "{{ update_bgp_neighbors }}"
+  loop_control:
+    loop_var: "bgp_neighbor"
+    label: "{{ bgp_neighbor['name'] }}"
+  register: api_response_bgpneighbors
+
+- name: "DEBUG RESULTS"
+  ansible.builtin.debug:
+    msg: "{{ api_response_bgpneighbors }}"

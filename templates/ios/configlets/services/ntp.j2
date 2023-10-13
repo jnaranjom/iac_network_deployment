@@ -1,9 +1,11 @@
-!
-{% for service in device_services['json']['servers'] %}
-{% if service['prefer'] %}
-ntp server {{ service['ipv4_host']}} prefer
-{% else%}
-ntp server  {{ service['ipv4_host']}}
+{% for service in services %}
+{% if 'ntp' in service['name'] %}
+{% for server in service['servers'] %}
+{% if server['prefer'] %}
+ntp server {{ server['ipv4_host'] }} prefer
+{% else %}
+ntp server {{ server['ipv4_host'] }}
 {% endif %}
 {% endfor %}
-!
+{% endif %}
+{% endfor %}

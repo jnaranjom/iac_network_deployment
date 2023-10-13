@@ -11,12 +11,14 @@
     - name: "INCLUDE VARIABLE FILES"
       ansible.builtin.include_vars:
         dir: "vars"
+        ignore_files:
+          - 'bootstrap.txt'
 
     # - name: "ADD NEW LOCATIONS TO SOT"
     #   ansible.builtin.include_tasks: "tasks/task_post_locations.yml"
 
-    # - name: "ADD NEW DEVICES TO SOT"
-    #   ansible.builtin.include_tasks: "tasks/task_post_devices.yml"
+    - name: "ADD NEW DEVICES TO SOT"
+      ansible.builtin.include_tasks: "tasks/task_post_devices.yml"
 
     # - name: "ADD NEW INTERFACES TO SOT"
     #   ansible.builtin.include_tasks: "tasks/task_post_interfaces.yml"
@@ -27,5 +29,11 @@
     # - name: "ADD NEW SERVICES TO SOT"
     #   ansible.builtin.include_tasks: "tasks/task_post_services.yml"
 
-    - name: "ADD NEW SERVICES TO SOT"
-      ansible.builtin.include_tasks: "tasks/task_post_protocols.yml"
+    # - name: "ADD NEW SERVICES TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_protocols.yml"
+
+    # - name: "ADD NEW SERVICES TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_vrfs.yml"
+
+    # - name: "ADD NEW SERVICES TO SOT"
+    #   ansible.builtin.include_tasks: "tasks/task_post_bgp_neighbors.yml"

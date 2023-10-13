@@ -1,0 +1,15 @@
+---
+- name: "GENERATE DEVICE INVENTORY"
+  ansible.builtin.add_host:
+    name: "{{ device['hostname'] }}"
+    ansible_host: "{{ device['ipv4_host'] | ansible.utils.ipaddr('address') }}"
+    ansible_user: "admin"
+    ansible_password: "admin"
+    groups: "devices"
+    ansible_network_os: "{{ device['os'] }}"
+    attributes: "{{ device['attributes'] }}"
+  loop: "{{ api_response_devices['json'] }}"
+  loop_control:
+    loop_var: device
+    label: "{{ device['hostname'] }}"
+  when: ( device['model'] == 'csr1000v' )

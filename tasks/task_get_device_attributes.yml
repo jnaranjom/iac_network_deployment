@@ -1,0 +1,18 @@
+---
+- name: "API CALL TO GET {{ attribute['key'] | upper }}"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/{{ attribute['key'] }}/{{ attribute_name['id'] }}"
+    method: GET
+    status_code: 200
+    body_format: json
+  register: api_response_attributes
+  loop: "{{ attribute['value'] }}"
+  loop_control:
+    loop_var: "attribute_name"
+    label: "{{ attribute_name['name'] }}"
+  delegate_to: localhost
+
+- name: "SET_FACT FOR ATTRIBUTES"
+  ansible.builtin.set_fact:
+    "{{ attribute['key'] }}": "{{ api_response_attributes['results'] | map(attribute='json') }}"
+  delegate_to: localhost

@@ -1,4 +1,5 @@
-{% for interface in device_interfaces['json']['interfaces'] %}
+{% for device_interfaces in interfaces %}
+{% for interface in device_interfaces['interfaces'] %}
 interface {{ interface['name'] }}{{ interface['port'] }}
  description {{ interface['description'] }}
 {% if interface['ipv4_prefix'] is not none %}
@@ -10,4 +11,5 @@ interface {{ interface['name'] }}{{ interface['port'] }}
  shutdown
 {% endif %}
 !
+{% endfor %}
 {% endfor %}

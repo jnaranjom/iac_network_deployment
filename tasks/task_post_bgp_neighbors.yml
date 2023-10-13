@@ -1,0 +1,17 @@
+---
+- name: "API CALL TO ADD NEW BGP NEIGHBORS"
+  ansible.builtin.uri:
+    url: "{{ api_url }}/api/bgpneighbors"
+    method: POST
+    body: "{{ device_neighbors }}"
+    status_code: 201
+    body_format: json
+  loop: "{{ bgp_neighbors }}"
+  loop_control:
+    label: "{{ device_neighbors['name'] }}"
+    loop_var: "device_neighbors"
+  register: api_response_bgpneighbors
+
+- name: "DEBUG RESULTS"
+  ansible.builtin.debug:
+    msg: "{{ api_response_bgpneighbors }}"

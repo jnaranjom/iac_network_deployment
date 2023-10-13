@@ -1,0 +1,65 @@
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname {{ inventory_hostname }}
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+username admin privilege 15 secret admin
+!
+!
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+{% include 'configlets/interfaces/edge/interfaces.j2' %}
+!
+!
+{% include 'configlets/protocols/edge/ospf.j2' %}
+!
+!
+!
+ip forward-protocol nd
+!
+!
+!
+no ip http server
+no ip http secure-server
+ip scp server enable
+!
+!
+{% include 'configlets/services/ntp.j2' %}
+!
+control-plane
+!
+{% include 'configlets/base/vty.j2' %}
+!
+end

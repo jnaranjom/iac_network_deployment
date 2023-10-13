@@ -1,98 +1,55 @@
 ---
 interfaces:
-  - name: lab01-edge01
+  - name: "lab01-edge02"
     version: "0.0.2"
     interfaces:
-      - name: Loopback
-        type: routed
+      - description: ROUTER-ID
         duplex: full
-        speed: null
+        ipv4_prefix: 2.2.2.2/32
+        name: Loopback
         policy_map: null
         port: "0"
-        description: ROUTER-ID
-        ipv4_prefix: 1.1.1.1/32
         shutdown: false
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
         speed: null
+        type: routed
+        vrf: default
+      - description: MGMT INTERFACE
+        duplex: full
+        ipv4_prefix: 192.168.2.51/24
+        name: GigabitEthernet
         policy_map: null
         port: "1"
-        description: MGMT INTERFACE
-        ipv4_prefix: 192.168.2.240/24
         shutdown: false
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
         speed: null
+        type: routed
+        vrf: default
+      - description: UNUSED
+        duplex: full
+        ipv4_prefix: null
+        name: GigabitEthernet
         policy_map: null
         port: "2"
-        description: UNUSED
-        ipv4_prefix: null
         shutdown: true
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
         speed: null
+        type: routed
+        vrf: default
+      - description: UNUSED
+        duplex: full
+        ipv4_prefix: null
+        name: GigabitEthernet
         policy_map: null
         port: "3"
-        description: UNUSED
-        ipv4_prefix: null
         shutdown: true
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
         speed: null
+        type: routed
+        vrf: default
+      - description: UNUSED
+        duplex: full
+        ipv4_prefix: null
+        name: GigabitEthernet
         policy_map: null
         port: "4"
-        description: UNUSED
-        ipv4_prefix: null
         shutdown: true
-  - name: lab01-edge02
-    version: "0.0.2"
-    interfaces:
-      - name: Loopback
-        type: routed
-        duplex: full
         speed: null
-        policy_map: null
-        port: "0"
-        description: ROUTER-ID
-        ipv4_prefix: 1.1.1.2/32
-        shutdown: false
-      - name: GigabitEthernet
         type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "1"
-        description: MGMT INTERFACE
-        ipv4_prefix: 192.168.2.239/24
-        shutdown: false
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "2"
-        description: UNUSED
-        ipv4_prefix: null
-        shutdown: true
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "3"
-        description: UNUSED
-        ipv4_prefix: null
-        shutdown: true
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "4"
-        description: UNUSED
-        ipv4_prefix: null
-        shutdown: true
+        vrf: default

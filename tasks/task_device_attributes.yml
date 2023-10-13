@@ -1,40 +1,74 @@
 ---
-- name: "READ DEVICE SPECIFIC ATTRIBUTES | INTERFACES"
-  ansible.builtin.uri:
-    url: "{{ api_url }}/api/interfaces/{{ attributes['interfaces'][0]['id'] }}"
-    method: GET
-    status_code: 200
-    body_format: json
-  register: device_interfaces
+- name: "BLOCK OF LOCAL TASKS"
+  block:
+    - name: "READ DEVICE SPECIFIC ATTRIBUTES | INTERFACES"
+      ansible.builtin.uri:
+        url: "{{ api_url }}/api/interfaces/{{ attributes['interfaces'][0]['id'] }}"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: device_interfaces
 
-- name: "READ DEVICE SPECIFIC ATTRIBUTES | SERVICES"
-  ansible.builtin.uri:
-    url: "{{ api_url }}/api/services/{{ attributes['services'][0]['id'] }}"
-    method: GET
-    status_code: 200
-    body_format: json
-  register: device_services
+    - name: "READ DEVICE SPECIFIC ATTRIBUTES | SERVICES"
+      ansible.builtin.uri:
+        url: "{{ api_url }}/api/services/{{ attributes['services'][0]['id'] }}"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: device_services
 
-- name: "READ DEVICE SPECIFIC ATTRIBUTES | LOCATIONS"
-  ansible.builtin.uri:
-    url: "{{ api_url }}/api/locations/{{ attributes['locations'][0]['id'] }}"
-    method: GET
-    status_code: 200
-    body_format: json
-  register: device_locations
+    - name: "READ DEVICE SPECIFIC ATTRIBUTES | LOCATIONS"
+      ansible.builtin.uri:
+        url: "{{ api_url }}/api/locations/{{ attributes['locations'][0]['id'] }}"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: device_locations
 
-- name: "READ DEVICE SPECIFIC ATTRIBUTES | ACLS"
-  ansible.builtin.uri:
-    url: "{{ api_url }}/api/acls/{{ attributes['acls'][0]['id'] }}"
-    method: GET
-    status_code: 200
-    body_format: json
-  register: device_acls
+    # - name: "READ DEVICE SPECIFIC ATTRIBUTES | ACLS"
+    #   ansible.builtin.uri:
+    #     url: "{{ api_url }}/api/acls/{{ attributes['acls'][0]['id'] }}"
+    #     method: GET
+    #     status_code: 200
+    #     body_format: json
+    #   register: device_acls
 
-- name: "READ DEVICE SPECIFIC ATTRIBUTES | PROTOCOLS"
-  ansible.builtin.uri:
-    url: "{{ api_url }}/api/protocols/{{ attributes['protocols'][0]['id'] }}"
-    method: GET
-    status_code: 200
-    body_format: json
-  register: device_protocols
+    - name: "READ DEVICE SPECIFIC ATTRIBUTES | PROTOCOLS"
+      ansible.builtin.uri:
+        url: "{{ api_url }}/api/protocols/{{ protocol['id'] }}"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: device_protocols
+      loop: "{{ attributes['protocols'] }}"
+      loop_control:
+        label: "{{ protocol['name'] }}"
+        loop_var: protocol
+
+    - name: "READ DEVICE SPECIFIC ATTRIBUTES | BGP NEIGHBORS"
+      ansible.builtin.uri:
+        url: "{{ api_url }}/api/bgpneighbors/{{ attributes['bgp_neighbors'][0]['id'] }}"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: device_bgpneighbors
+      when: ( attributes['bgp_neighbors'] is not none )
+
+    - name: "READ DEVICE SPECIFIC ATTRIBUTES | VRFs"
+      ansible.builtin.uri:
+        url: "{{ api_url }}/api/vrfs/{{ attributes['vrfs'][0]['id'] }}"
+        method: GET
+        status_code: 200
+        body_format: json
+      register: device_vrfs
+      when: ( attributes['vrfs'] is not none )
+
+  delegate_to: localhost
+
+- name: "DEBUG"
+  ansible.builtin.debug:
+    msg: "{{ item['json'] }}"
+  loop: "{{ device_protocols['results'] }}"
+  loop_control:
+    label: "{{ item['status'] }}"
+  when: ( attributes['vrfs'] is not none )

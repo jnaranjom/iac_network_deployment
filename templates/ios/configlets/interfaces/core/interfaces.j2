@@ -1,0 +1,20 @@
+{% for device_interfaces in interfaces %}
+{% for interface in device_interfaces['interfaces'] %}
+interface {{ interface['name'] }}{{ interface['port'] }}
+ description {{ interface['description'] }}
+{% if 'default' not in interface['vrf'] %}
+ ip vrf forwarding {{ interface['vrf'] }}
+{% endif %}
+{% if interface['ipv4_prefix'] is not none %}
+ ip address {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('address') }} {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('netmask') }}
+ ip ospf 1 area 0
+ mpls ip
+{% endif %}
+{% if not interface['shutdown'] %}
+ no shutdown
+{% else %}
+ shutdown
+{% endif %}
+!
+{% endfor %}
+{% endfor %}
