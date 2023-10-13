@@ -50,9 +50,9 @@ redundancy
 !
 {#{% if attributes['bgp_neighbors'] is not none %}
 {% include 'configlets/protocols/core/bgp.j2' %}
-{% endif %}
+{% endif %}#}
 !
-{% include 'configlets/protocols/core/ospf.j2' %}#}
+{% include 'configlets/protocols/core/ospf.j2' %}
 !
 !
 !

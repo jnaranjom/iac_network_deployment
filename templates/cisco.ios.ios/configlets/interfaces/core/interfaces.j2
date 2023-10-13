@@ -1,0 +1,14 @@
+{% for device_interfaces in interfaces %}
+{% for interface in device_interfaces['interfaces'] %}
+interface {{ interface['name'] }}{{ interface['port'] }}
+ description {{ interface['description'] }}
+{% include 'configlets/interfaces/core/interfaces_vrf.j2' %}
+{% include 'configlets/interfaces/core/interfaces_ipaddress.j2' %}
+{% if interface['name'] == "GigabitEthernet" and interface['port'] != "1" %}
+{% include 'configlets/interfaces/core/interfaces_ospf.j2' %}
+ mpls ip
+{% endif %}
+{% include 'configlets/interfaces/core/interfaces_status.j2' %}
+!
+{% endfor %}
+{% endfor %}

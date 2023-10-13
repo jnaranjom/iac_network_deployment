@@ -5,6 +5,8 @@
     ansible_host: "{{ device['ipv4_host'] | ansible.utils.ipaddr('address') }}"
     ansible_user: "admin"
     ansible_password: "admin"
+    role: "{{ device['role']['name'] }}"
+    scope: "{{ device['role']['scope'] }}"
     groups: "devices"
     ansible_network_os: "{{ device['os'] }}"
     attributes: "{{ device['attributes'] }}"
@@ -12,4 +14,4 @@
   loop_control:
     loop_var: device
     label: "{{ device['hostname'] }}"
-  when: ( device['model'] == 'csr1000v' )
+  when: ( device['os'] == 'cisco.ios.ios' )

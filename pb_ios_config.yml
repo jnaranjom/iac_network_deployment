@@ -34,20 +34,20 @@
       loop: "{{ attributes | dict2items }}"
       loop_control:
         loop_var: "attribute"
-        label: "{{ attribute ['key'] }}"
+        label: "{{ attribute['key'] }}"
 
-    - name: "20: RENDER CONFIGURATION EDGE DEVICES"
-      ansible.builtin.template:
-        src: "templates/ios/edge.j2"
-        dest: "configs/{{ inventory_hostname }}.cfg"
-      when: ( 'edge' in inventory_hostname )
+    - name: "20: DEBUG DEVICE ATTRIBUTES"
+      ansible.builtin.debug:
+        msg: "{{ hostvars[inventory_hostname] }}"
+      delegate_to: "localhost"
 
-    - name: "30: RENDER CONFIGURATION CORE DEVICES"
+    - name: "20: RENDER DEVICE CONFIGURATION"
       ansible.builtin.template:
-        src: "templates/ios/core.j2"
+        src: "templates/{{ ansible_network_os }}/{{ scope }}.j2"
         dest: "configs/{{ inventory_hostname }}.cfg"
-      when: ( 'p' in inventory_hostname )
-    #
+      delegate_to: "localhost"
+
+    # #
     # - name: "APPLY CONFIG"
     #   napalm.napalm.napalm_install_config:
     #     dev_os: "ios"

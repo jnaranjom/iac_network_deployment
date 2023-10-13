@@ -1,0 +1,3 @@
+{%- if 'default' not in interface['vrf'] %}
+ ip vrf forwarding {{ interface['vrf'] }}
+{% endif -%}
