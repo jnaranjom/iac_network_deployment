@@ -1,6 +1,8 @@
-## Network Diagram
+## Network Diagram (MPLS VPN network)
 
-Basic MPLS VPN network with IOSXE devices
+- IOSXE devices
+- All devices connected to the same Management network
+- Baseline (Hostname and MGMT address already applied to the devices)
 
 ```mermaid
 flowchart LR
