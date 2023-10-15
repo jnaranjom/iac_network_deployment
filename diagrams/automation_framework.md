@@ -14,6 +14,7 @@ flowchart TB
         F --> C
         C --> A
     end
+    F --> FRONTEND
     subgraph AUTOMATION DEPLOYMENT
         D --> B
         D --> E
