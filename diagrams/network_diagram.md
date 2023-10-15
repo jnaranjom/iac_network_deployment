@@ -15,4 +15,7 @@ flowchart LR
     C --- D(PE02)
     end
     D --- E[EDGE02]
+    subgraph SITE02
+    B[EDGE02]
+    end
 ```
