@@ -6,6 +6,7 @@
 
 ```mermaid
 flowchart LR
+
   A[EDGE01]
   subgraph MPLS CORE
       A --- B(PE01)
