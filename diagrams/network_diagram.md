@@ -5,12 +5,15 @@
 - Baseline (Hostname and MGMT address already applied to the devices)
 
 ```mermaid
-
 flowchart LR
-    A[EDGE01] -- B(PE01)
-    subgraph MPLS CORE
-        B --- C(P01)
-        C --- D(PE02)
+    c1-->a2
+    subgraph one
+    a1-->a2
     end
-    D --- E[EDGE02]
+    subgraph two
+    b1-->b2
+    end
+    subgraph three
+    c1-->c2
+    end
 ```
