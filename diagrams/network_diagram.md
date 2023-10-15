@@ -7,12 +7,10 @@
 ```mermaid
 flowchart LR
 
-  A[EDGE01]
+  A[EDGE01] -- B(PE01)
   subgraph MPLS CORE
-      A --- B(PE01)
       B --- C(P01)
       C --- D(PE02)
-      D --- E[EDGE02]
   end
-  E[EDGE02]
+  D --- E[EDGE02]
 ```
