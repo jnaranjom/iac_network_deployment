@@ -13,7 +13,7 @@ flowchart LR
       A --- B(PE01)
       B --- C(P01)
       C --- D(PE02)
-      D --- E
+      D --- E[EDGE02]
   end
   subgraph CUSTOMER SITE 02
       E[EDGE02]
