@@ -6,5 +6,5 @@
 
 ```mermaid
 flowchart LR
-    A[(MongoDB)]
+    A[EDGE01] --- B(PE01)
 ```
