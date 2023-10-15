@@ -6,7 +6,6 @@ flowchart TB
     D(Ansible)
     E[[Network Infrastructure]]
     F(((ENGINEER)))
-    G[[EVENG]]
     subgraph BACKEND - SoT
         B --> A
     end
@@ -16,9 +15,6 @@ flowchart TB
     end
     F --> C
     F --> D
-    subgraph TEST BED
-        D --> G
-    end
     subgraph AUTOMATION DEPLOYMENT
         D --> E
     end
