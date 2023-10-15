@@ -6,7 +6,8 @@
 
 ```mermaid
 flowchart LR
-    subgraph CUSTOMER
-        A[EDGE01] -- B(PE01)
-    end
+    A[EDGE01] -- B(PE01)
+    B --- C(P01)
+    C --- D(PE02)
+    D --- E[EDGE02]
 ```
