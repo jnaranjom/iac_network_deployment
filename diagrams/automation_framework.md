@@ -1,5 +1,5 @@
 ```mermaid
-flowchart LR
+flowchart TB
     A[(MongoDB)]
     B[[FastAPI]]
     C(MongoDB Cloud Atlas)
