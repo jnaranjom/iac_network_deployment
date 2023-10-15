@@ -6,6 +6,9 @@
 
 ```mermaid
 flowchart LR
+    subgraph SITE01
+    A[EDGE01]
+    end
     A[EDGE01] --- B(PE01)
     subgraph MPLS CORE
     B --- C(P01)
