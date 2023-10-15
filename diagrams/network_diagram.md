@@ -16,6 +16,6 @@ flowchart LR
     end
     D --- E[EDGE02]
     subgraph SITE02
-    B[EDGE02]
+    E[EDGE02]
     end
 ```
