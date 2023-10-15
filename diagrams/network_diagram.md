@@ -10,6 +10,7 @@ flowchart LR
       A[EDGE01] --- B(PE01)
   end
   subgraph MPLS CORE
+      A --- B
       B --- C(P01)
       C --- D(PE02)
   end
