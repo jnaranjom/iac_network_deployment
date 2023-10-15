@@ -1,15 +1,15 @@
 ```mermaid
 flowchart TB
-    A[(MongoDB SoT)]
+    A[(MongoDB)]
     B[[FastAPI]]
     C(MongoDB Cloud Atlas)
     D(Ansible)
     E[[Network Infrastructure]]
     F[ENGINEER]
-    subgraph BACK END
+    subgraph BACKEND (SoT)
         B --> A
     end
-    subgraph FRONT END
+    subgraph FRONTEND
         F --> D
         F --> C
         C --> A
