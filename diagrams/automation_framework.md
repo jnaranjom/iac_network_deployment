@@ -6,7 +6,7 @@ flowchart TB
     D(Ansible)
     E[[Network Infrastructure]]
     F[ENGINEER]
-    subgraph BACKEND (SoT)
+    subgraph BACKEND - SoT
         B --> A
     end
     subgraph FRONTEND
