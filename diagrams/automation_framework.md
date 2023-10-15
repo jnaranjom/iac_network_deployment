@@ -6,13 +6,13 @@ flowchart TB
     D(Ansible)
     E[[Network Infrastructure]]
     F[ENGINEER]
+    subgraph BACKEND
+        B --> A
+    end
     subgraph FRONTEND
         F --> B
         F --> D
         F --> C
-    end
-    subgraph BACKEND
-        B --> A
     end
     subgraph AUTOMATION DEPLOYMENT
         D --> B
