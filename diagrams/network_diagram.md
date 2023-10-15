@@ -6,7 +6,7 @@
 
 ```mermaid
 flowchart LR
-    c1-->a2
+    A[EDGE01] -- B(PE01)
     subgraph one
     a1-->a2
     end
