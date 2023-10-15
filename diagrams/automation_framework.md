@@ -1,8 +1,8 @@
 ```mermaid
 flowchart TB
-    A[(MongoDB)]
+    A[(MongoDB Cloud Atlas)]
     B[[FastAPI]]
-    C(MongoDB Cloud Atlas)
+    C(MongoDB Compass App)
     D(Ansible)
     E[[Network Infrastructure]]
     F(((ENGINEER)))
