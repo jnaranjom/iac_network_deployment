@@ -5,7 +5,7 @@ flowchart TB
     C(MongoDB Cloud Atlas)
     D(Ansible)
     E[[Network Infrastructure]]
-    F[ENGINEER]
+    F(((ENGINEER)))
     subgraph BACKEND - SoT
         B --> A
     end
