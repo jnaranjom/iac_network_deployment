@@ -7,6 +7,6 @@
 ```mermaid
 flowchart LR
     subgraph CUSTOMER
-    A[EDGE01] -- B(PE01)
+        A[EDGE01] -- B(PE01)
     end
 ```
