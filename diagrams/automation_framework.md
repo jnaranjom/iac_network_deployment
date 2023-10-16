@@ -1,8 +1,8 @@
 ## Network Automation Platform
 
+```mermaid
 %%{init: {'theme':'forest'}}%%
 
-```mermaid
 flowchart TB
     A[(MongoDB Cloud Atlas)]
     B[[FastAPI]]
