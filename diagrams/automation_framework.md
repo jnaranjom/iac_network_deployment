@@ -1,7 +1,7 @@
 ## Network Automation Platform
 
 ```mermaid
-%%{init: {'theme':'forest'}}%%
+%%{init: {'theme':'dark'}}%%
 
 flowchart TB
     A[(MongoDB Cloud Atlas)]
