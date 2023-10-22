@@ -1,56 +1,54 @@
 ---
 endpoint_list:
-  - id: "651f8726a5e098e62533d595"
-    name: lab01-pe02
-    version: 0.0.2
-    interfaces:
-      - name: Loopback
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "0"
-        description: ROUTER-ID [OSPF/BGP]
-        ipv4_prefix: 5.5.5.5/32
-        shutdown: false
-        vrf: default
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "1"
-        description: MGMT INTERFACE
-        ipv4_prefix: 192.168.2.54/24
-        shutdown: false
-        vrf: default
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "2"
-        description: CORE-PE02-P01
-        ipv4_prefix: 10.10.0.6/30
-        shutdown: false
-        vrf: default
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "3"
-        description: "CUST1 EDGE02"
-        ipv4_prefix: "10.100.0.5/30"
-        shutdown: false
-        vrf: "CUST1_VRF"
-      - name: GigabitEthernet
-        type: routed
-        duplex: full
-        speed: null
-        policy_map: null
-        port: "4"
-        description: UNUSED
-        ipv4_prefix: null
-        shutdown: true
-        vrf: default
+- id: 651f8724a5e098e62533d594
+  interfaces:
+  - description: ROUTER-ID
+    duplex: full
+    ipv4_prefix: 4.4.4.4/32
+    name: Loopback
+    policy_map: null
+    port: '0'
+    shutdown: false
+    speed: null
+    type: routed
+    vrf: "default"
+  - description: MGMT INTERFACE
+    duplex: full
+    ipv4_prefix: 192.168.2.53/24
+    name: GigabitEthernet
+    policy_map: null
+    port: '1'
+    shutdown: false
+    speed: null
+    type: routed
+    vrf: "default"
+  - description: CORE-P01-PE01
+    duplex: full
+    ipv4_prefix: 10.10.0.2/30
+    name: GigabitEthernet
+    policy_map: null
+    port: '2'
+    shutdown: false
+    speed: null
+    type: routed
+    vrf: "default"
+  - description: CORE-P01-PE02
+    duplex: full
+    ipv4_prefix: 10.10.0.5/30
+    name: GigabitEthernet
+    policy_map: null
+    port: '3'
+    shutdown: false
+    speed: null
+    type: routed
+    vrf: "default"
+  - description: UNUSED
+    duplex: full
+    ipv4_prefix: null
+    name: GigabitEthernet
+    policy_map: null
+    port: '4'
+    shutdown: true
+    speed: null
+    type: routed
+    vrf: "default"

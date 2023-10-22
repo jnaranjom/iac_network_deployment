@@ -13,7 +13,7 @@ boot-end-marker
 no aaa new-model
 !
 !
-{#{% if attributes['vrfs'] is not none %}
+{#{% if attributes['vrfs'] is defined %}
 {% include 'configlets/vrfs/core/vrfs.j2' %}
 {% endif %}#}
 !
@@ -48,9 +48,9 @@ redundancy
 !
 {% include 'configlets/interfaces/core/interfaces.j2' %}
 !
-{#{% if attributes['bgp_neighbors'] is not none %}
+{% if attributes['bgpneighbors'] is defined %}
 {% include 'configlets/protocols/core/bgp.j2' %}
-{% endif %}#}
+{% endif %}
 !
 {% include 'configlets/protocols/core/ospf.j2' %}
 !

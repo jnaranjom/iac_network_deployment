@@ -1,19 +1,22 @@
-{% for protocol in device_protocols['results'] %}
-{% if protocol['json']['name'] == 'bgp' %}
-router bgp {{ protocol['json']['attributes']['asn'] }}
- bgp router-id interface {{ protocol['json']['attributes']['router_id'] }}
-{% if protocol['json']['attributes']['log_neighbor_changes'] is defined and protocol['json']['attributes']['log_neighbor_changes'] %}
- bgp log-neighbor-changes
+{% for protocol in protocols %}
+{% if protocol['name'] == 'bgp' %}
+router bgp {{ protocol['attributes']['asn'] }}
+ bgp router-id interface {{ protocol['attributes']['router_id'] }}
 {% endif %}
-{% endif %}
-{% endfor %}
-!
-{% for neighbor in device_neighbors['json']['neighbors'] %}
- neighbor {{ neighbor['ipv4'] }} remote-as {{ neighbor['remote_as'] }}
- neighbor {{ neighbor['ipv4'] }} update-source {{ neighbor['update_source'] }}
 {% endfor %}
 
+{% for neighbor in bgpneighbors[0]['neighbors'] %}
+{% if neighbor['vrf'] == "default" %}
+ neighbor {{ neighbor['ipv4'] }} remote-as {{ neighbor['remote_as'] }}
+ neighbor {{ neighbor['ipv4'] }} update-source Loopback0
+{% endif %}
+{% endfor %}
+ no auto-summary
+
  address-family vpnv4
-{% for neighbor in device_neighbors['json']['neighbors'] %}
- neighbor {{ neighbor['ipv4'] }} activate
+{% for neighbor in bgpneighbors[0]['neighbors'] %}
+{% if neighbor['vrf'] == "default" %}
+  neighbor {{ neighbor['ipv4'] }} activate
+  neighbor {{ neighbor['ipv4'] }} send-community extended
+{% endif %}
 {% endfor %}

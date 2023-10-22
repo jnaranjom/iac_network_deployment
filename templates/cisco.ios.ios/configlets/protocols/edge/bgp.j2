@@ -1,13 +1,6 @@
-!
-router bgp {{ device_protocols['json']['attributes']['asn'] }}
- bgp router-id interface {{ device_protocols['json']['attributes']['router_id'] }}
-{% if log_neighbor_changes is defined and log_neighbor_changes %}
- bgp log-neighbor-changes
+{% for protocol in protocols %}
+{% if protocol['name'] == 'bgp' %}
+router bgp {{ protocol['attributes']['asn'] }}
+ bgp router-id interface {{ protocol['attributes']['router_id'] }}
 {% endif %}
-{% if inventory_hostname == 'edge01' %}
- neighbor 10.10.0.2 remote-as {{ device_protocols['json']['attributes']['asn'] }}
- network 1.1.1.1 mask 255.255.255.255
-{% else %}
- neighbor 10.10.0.1 remote-as {{ device_protocols['json']['attributes']['asn'] }}
- network 1.1.1.2 mask 255.255.255.255
-{% endif %}
+{% endfor %}

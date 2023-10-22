@@ -7,7 +7,7 @@
   vars:
     api_url: "http://192.168.2.201:8000"
     endpoint: "interfaces"
-    id: "651f8723a5e098e62533d593"
+    id: "651f8724a5e098e62533d594"
 
   tasks:
     - name: "TASK GET ENDPOINTS OBJECTS IN SOT"

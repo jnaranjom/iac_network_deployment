@@ -6,7 +6,7 @@
 
   vars:
     api_url: "http://192.168.2.201:8000"
-    endpoint: "fabrics"
+    endpoint: "interfaces"
 
   tasks:
     - name: "INCLUDE VARIABLE FILES"

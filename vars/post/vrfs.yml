@@ -1,9 +1,9 @@
 ---
 endpoint_list:
-  - name: default
-    version: "0.0.2"
-    export_route_policy: "null"
-    export_rt: "null"
-    import_route_policy: "null"
-    import_rt: "null"
-    rd: "null"
+  - export_route_policy: 'null'
+    export_rt: 200:200
+    import_route_policy: 'null'
+    import_rt: 200:200
+    name: CUST2_VRF
+    rd: 200:200
+    version: 0.0.1

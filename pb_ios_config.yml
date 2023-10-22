@@ -40,6 +40,8 @@
       ansible.builtin.debug:
         msg: "{{ hostvars[inventory_hostname] }}"
       delegate_to: "localhost"
+      tags:
+        - "debug"
 
     - name: "20: RENDER DEVICE CONFIGURATION"
       ansible.builtin.template:
@@ -47,19 +49,9 @@
         dest: "configs/{{ inventory_hostname }}.cfg"
       delegate_to: "localhost"
 
-    # #
-    # - name: "APPLY CONFIG"
-    #   napalm.napalm.napalm_install_config:
-    #     dev_os: "ios"
-    #     config_file: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
-    #     commit_changes: true
-    #     replace_config: false
-
-    # - name: "APPLY CONFIG"
-    #   cisco.ios.ios_config:
-    #     src: "configs/{{ attributes['locations'][0]['name'] }}-{{ inventory_hostname }}.cfg"
-
-    # - name: "DEBUG IOS COMMAND"
-    #   cisco.ios.ios_command:
-    #     commands:
-    #       - "show version"
+    - name: "APPLY CONFIG"
+      napalm.napalm.napalm_install_config:
+        dev_os: "ios"
+        config_file: "configs/{{ inventory_hostname }}.cfg"
+        commit_changes: true
+        replace_config: false

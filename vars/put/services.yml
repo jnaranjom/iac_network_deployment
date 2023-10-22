@@ -1,4 +1,9 @@
 ---
 endpoint_list:
-  - id: "651c457435114b4d8239473c"
-    version: "0.0.2"
+  - name: ntp
+    version: 0.0.1
+    servers:
+      - ipv4_host: 10.0.0.7
+        prefer: true
+      - ipv4_host: 10.0.0.8
+        prefer: false
