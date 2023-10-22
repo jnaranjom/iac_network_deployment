@@ -1,7 +1,0 @@
----
-endpoint_list:
-  - name: dns
-    version: "0.0.3"
-    servers:
-      - ipv4_host: "10.0.2.7"
-      - ipv4_host: "10.0.2.8"
