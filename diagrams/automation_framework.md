@@ -15,8 +15,7 @@ flowchart TB
         B --> A
     end
     subgraph FRONTEND
-        C --> A
-        
+        C --> A   
         G --> B
     end
     F --> C
