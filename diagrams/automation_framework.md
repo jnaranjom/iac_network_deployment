@@ -20,6 +20,7 @@ flowchart TB
     F --> G
     subgraph AUTOMATION DEPLOYMENT
         D --> B
+        D --> I
         H --> I
         H --> D
     end
