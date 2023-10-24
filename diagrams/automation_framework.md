@@ -8,12 +8,14 @@ flowchart TB
     D(Ansible)
     E[[Network Infrastructure]]
     F(((ENGINEER)))
+    G(GRAFANA)
     subgraph BACKEND - SoT
         B --> A
     end
     subgraph FRONTEND
         C --> A
         D --> B
+        G --> B
     end
     F --> C
     F --> D
