@@ -1,5 +1,0 @@
----
-roles:
-  - name: "ansible_role_sot_operations"
-    scm: "git"
-    src: "git@github.com:jnaranjom/iac_network_sot_operations.git"
