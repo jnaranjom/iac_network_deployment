@@ -9,7 +9,7 @@
 
   tasks:
     - name: "TASK: CLONE SOT OPERTATIONS REPO"
-      git:
+      ansible.builtin.git:
         repo: "git@github.com:jnaranjom/ansible_role_sot_operations.git"
         dest: "roles/ansible_role_sot_operations"
         clone: yes
@@ -44,7 +44,7 @@
         src: "configs/default/{{ inventory_hostname }}.cfg"
         dest: "bootflash:/{{ inventory_hostname }}.cfg"
 
-    - name: "TASK - REPLACE EXITING CONFIGURATION WITH DEFAULT"
+    - name: "TASK - REPLACE EXISTING CONFIGURATION WITH DEFAULT"
       cisco.ios.ios_command:
         commands: "configure replace bootflash:/{{ inventory_hostname }}.cfg force"
 
