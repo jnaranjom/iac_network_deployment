@@ -32,7 +32,7 @@
     - name: "TASK: COPY DEFAULT CONFIGURATION FILE TO DEVICE"
       ansible.builtin.net_put:
         src: "configs/default/{{ inventory_hostname }}.cfg"
-        dest : "bootflash:/{{ inventory_hostname }}.cfg"
+        dest: "bootflash:/{{ inventory_hostname }}.cfg"
 
     - name: "TASK - REPLACE EXITING CONFIGURATION WITH DEFAULT"
       cisco.ios.ios_command:
