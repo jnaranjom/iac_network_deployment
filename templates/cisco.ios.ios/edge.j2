@@ -13,6 +13,9 @@ boot-end-marker
 no aaa new-model
 !
 !
+{% if attributes['vrfs'] is defined %}
+{% include 'configlets/vrfs/core/vrfs.j2' %}
+{% endif %}
 !
 !
 !
@@ -42,6 +45,10 @@ redundancy
 !
 {% include 'configlets/interfaces/edge/interfaces.j2' %}
 !
+!
+{% if attributes['bgpneighbors'] is defined %}
+{% include 'configlets/protocols/edge/bgp.j2' %}
+{% endif %}
 !
 {% include 'configlets/protocols/edge/ospf.j2' %}
 !

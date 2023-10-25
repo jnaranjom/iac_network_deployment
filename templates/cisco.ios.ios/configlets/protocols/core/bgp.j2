@@ -4,7 +4,7 @@ router bgp {{ protocol['attributes']['asn'] }}
  bgp router-id interface {{ protocol['attributes']['router_id'] }}
 {% endif %}
 {% endfor %}
-
+!
 {% for neighbor in bgpneighbors[0]['neighbors'] %}
 {% if neighbor['vrf'] == "default" %}
  neighbor {{ neighbor['ipv4'] }} remote-as {{ neighbor['remote_as'] }}
@@ -20,3 +20,12 @@ router bgp {{ protocol['attributes']['asn'] }}
   neighbor {{ neighbor['ipv4'] }} send-community extended
 {% endif %}
 {% endfor %}
+!
+{% if attributes['vrfs'] is defined %}
+{% for neighbor in bgpneighbors[0]['neighbors'] %}
+{% if neighbor['vrf'] != "default" %}
+ address-family ipv4 vrf {{ neighbor['vrf'] }}
+  neighbor {{ neighbor['ipv4'] }} remote-as {{ neighbor['remote_as'] }}
+{% endif %}
+{% endfor %}
+{% endif %}
