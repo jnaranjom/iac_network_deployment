@@ -1,3 +1,0 @@
-[submodule "roles/ansible_role_sot_operations"]
-	path = roles/ansible_role_sot_operations
-	url = git@github.com:jnaranjom/ansible_role_sot_operations.git
