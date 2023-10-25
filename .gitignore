@@ -167,4 +167,4 @@ output/*
 
 # Ignore roles
 
-#roles/ansible*
+roles/ansible*

@@ -8,6 +8,16 @@
     api_url: "http://192.168.2.201:8000"
 
   tasks:
+    - name: "TASK: CLONE SOT OPERTATIONS REPO"
+      git:
+        repo: "git@github.com:jnaranjom/ansible_role_sot_operations.git"
+        dest: "roles/ansible_role_sot_operations"
+        clone: yes
+        accept_hostkey: yes
+        recursive: yes
+        force: yes
+        version: main
+
     - name: "TASK GET ENDPOINTS OBJECTS IN SOT"
       ansible.builtin.include_role:
         name: "ansible_role_sot_operations"
