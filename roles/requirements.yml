@@ -1,1 +1,3 @@
 ---
+- name: ansible_role_sot_operations
+  src: git@github.com:jnaranjom/iac_network_sot_operations.git
