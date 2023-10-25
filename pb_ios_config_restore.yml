@@ -29,12 +29,12 @@
     api_url: "http://192.168.2.201:8000"
 
   tasks:
-    - name: "COPY DEFAULT CONFIG FILE TO DEVICE"
+    - name: "TASK: COPY DEFAULT CONFIGURATION FILE TO DEVICE"
       ansible.builtin.net_put:
         src: "configs/default/{{ inventory_hostname }}.cfg"
         dest : "bootflash:/{{ inventory_hostname }}.cfg"
 
-    - name: "CONFIG REPLACE CONFIG"
+    - name: "TASK - REPLACE EXITING CONFIGURATION WITH DEFAULT"
       cisco.ios.ios_command:
         commands: "configure replace bootflash:/{{ inventory_hostname }}.cfg force"
 
