@@ -10,6 +10,7 @@
     groups: "devices"
     ansible_network_os: "{{ device['os'] }}"
     attributes: "{{ device['attributes'] }}"
+    device_id: "{{ device['_id'] }}"
   loop: "{{ api_response_devices['json'] }}"
   loop_control:
     loop_var: device

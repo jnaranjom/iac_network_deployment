@@ -1,0 +1,44 @@
+---
+- name: "RETRIEVE DEVICE ATTRIBUTES"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    api_url: "http://192.168.2.201:8000"
+
+  tasks:
+    - name: "TASK GET ENDPOINTS OBJECTS IN SOT"
+      ansible.builtin.include_role:
+        name: "ansible_role_sot_operations"
+        tasks_from: "task_get_request"
+      vars:
+        endpoint: "devices"
+
+    - name: "GENERATE INVENTORY"
+      ansible.builtin.include_tasks: "tasks/task_generate_inventory.yml"
+      vars:
+        api_response_devices: "{{ api_response }}"
+
+- name: "RETRIEVE ATTRIBUTES PER DEVICE"
+  hosts: "devices"
+  connection: "network_cli"
+  gather_facts: false
+
+  vars:
+    api_url: "http://192.168.2.201:8000"
+
+  tasks:
+    - name: "COPY DEFAULT CONFIG FILE TO DEVICE"
+      ansible.builtin.net_put:
+        src: "configs/default/{{ inventory_hostname }}.cfg"
+        dest : "bootflash:/{{ inventory_hostname }}.cfg"
+
+    - name: "CONFIG REPLACE CONFIG"
+      cisco.ios.ios_command:
+        commands: "configure replace bootflash:/{{ inventory_hostname }}.cfg force"
+
+    - name: "UPDATE DEVICE NETWORK SOT STATUS"
+      ansible.builtin.include_tasks: "tasks/task_update_device_status.yml"
+      vars:
+        device_status: "Stage"

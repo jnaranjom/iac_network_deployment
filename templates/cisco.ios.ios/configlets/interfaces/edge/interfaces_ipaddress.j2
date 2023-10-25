@@ -1,0 +1,3 @@
+{% if interface['ipv4_prefix'] is not none %}
+ ip address {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('address') }} {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('netmask') }}
+{% endif %}

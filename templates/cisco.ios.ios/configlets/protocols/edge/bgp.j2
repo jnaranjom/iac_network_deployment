@@ -2,5 +2,16 @@
 {% if protocol['name'] == 'bgp' %}
 router bgp {{ protocol['attributes']['asn'] }}
  bgp router-id interface {{ protocol['attributes']['router_id'] }}
+ redistribute connected
 {% endif %}
 {% endfor %}
+!
+{% for neighbor in bgpneighbors[0]['neighbors'] %}
+{% if neighbor['vrf'] == "default" %}
+ neighbor {{ neighbor['ipv4'] }} remote-as {{ neighbor['remote_as'] }}
+ neighbor {{ neighbor['ipv4'] }} allowas-in
+{% endif %}
+{% endfor %}
+
+ no auto-summary
+!
