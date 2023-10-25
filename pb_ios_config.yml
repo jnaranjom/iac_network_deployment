@@ -55,3 +55,8 @@
         config_file: "configs/{{ inventory_hostname }}.cfg"
         commit_changes: true
         replace_config: false
+
+    - name: "UPDATE DEVICE NETWORK SOT STATUS"
+      ansible.builtin.include_tasks: "tasks/task_update_device_status.yml"
+      vars:
+        device_status: "Go Live"

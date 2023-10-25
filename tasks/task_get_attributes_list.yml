@@ -11,5 +11,5 @@
 
     - name: "20: SET_FACT DEVICE ATTRIBUTES"
       ansible.builtin.set_fact:
-          api_response_attributes: "{{ api_response_attributes | default([]) + [api_response['json']] }}"
+        api_response_attributes: "{{ api_response_attributes | default([]) + [api_response['json']] }}"
       delegate_to: localhost

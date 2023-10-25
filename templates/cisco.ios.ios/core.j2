@@ -13,9 +13,9 @@ boot-end-marker
 no aaa new-model
 !
 !
-{#{% if attributes['vrfs'] is defined %}
+{% if attributes['vrfs'] is defined %}
 {% include 'configlets/vrfs/core/vrfs.j2' %}
-{% endif %}#}
+{% endif %}
 !
 !
 !

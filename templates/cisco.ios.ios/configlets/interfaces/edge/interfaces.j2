@@ -2,14 +2,11 @@
 {% for interface in device_interfaces['interfaces'] %}
 interface {{ interface['name'] }}{{ interface['port'] }}
  description {{ interface['description'] }}
-{% if interface['ipv4_prefix'] is not none %}
- ip address {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('address') }} {{ interface['ipv4_prefix'] | ansible.utils.ipaddr('netmask') }}
+{% include 'configlets/interfaces/core/interfaces_vrf.j2' %}
+{% include 'configlets/interfaces/core/interfaces_ipaddress.j2' %}
+{% if interface['description'] != "MGMT INTERFACE" and not interface['shutdown']%}
 {% endif %}
-{% if not interface['shutdown'] %}
- no shutdown
-{% else %}
- shutdown
-{% endif %}
+{% include 'configlets/interfaces/core/interfaces_status.j2' %}
 !
 {% endfor %}
 {% endfor %}
