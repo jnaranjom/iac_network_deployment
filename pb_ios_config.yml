@@ -2,7 +2,7 @@
 - name: "RETRIEVE DEVICE ATTRIBUTES"
   hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
 
   vars:
     api_url: "http://192.168.2.201:8000"
@@ -58,6 +58,9 @@
         src: "templates/{{ ansible_network_os }}/{{ scope }}.j2"
         dest: "configs/{{ inventory_hostname }}.cfg"
       delegate_to: "localhost"
+
+    - name: "TASK - LOAD CONFIG TO SOT"
+      ansible.builtin.include_tasks: "tasks/task_load_device_config.yml"
 
     - name: "APPLY CONFIG"
       napalm.napalm.napalm_install_config:

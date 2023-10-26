@@ -2,7 +2,7 @@
 - name: "RETRIEVE DEVICE ATTRIBUTES"
   hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
 
   vars:
     api_url: "http://192.168.2.201:8000"
@@ -39,6 +39,9 @@
     api_url: "http://192.168.2.201:8000"
 
   tasks:
+    - name: "TASK - LOAD DEFAULT CONFIG TO SOT"
+      ansible.builtin.include_tasks: "tasks/task_load_device_default_config.yml"
+
     - name: "TASK: COPY DEFAULT CONFIGURATION FILE TO DEVICE"
       ansible.builtin.net_put:
         src: "configs/default/{{ inventory_hostname }}.cfg"
