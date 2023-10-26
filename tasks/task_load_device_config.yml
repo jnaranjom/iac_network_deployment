@@ -1,0 +1,14 @@
+- name: "LOAD DEVICE CONFIG INTO VARIABLE"
+  ansible.builtin.set_fact:
+    device_config: "{{ lookup('ansible.builtin.file', 'configs/' + inventory_hostname + '.cfg') }}"
+  delegate_to: "localhost"
+
+- name: "UPDATE DEVICE CONFIGURATION VARIABLE"
+  ansible.builtin.include_role:
+    name: "ansible_role_sot_operations"
+    tasks_from: "task_put_request"
+  vars:
+    endpoint: "devices"
+    endpoint_list:
+      - id: "{{ device_id }}"
+        configuration: "{{ device_config }}"
