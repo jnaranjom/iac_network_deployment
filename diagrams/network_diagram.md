@@ -9,6 +9,9 @@ flowchart LR
     subgraph SITE01
     A[EDGE01]
     end
+    subgraph SITE03
+    F[EDGE03]
+    end
     A[EDGE01] --- B(PE01)
     subgraph MPLS CORE
     B --- C(P01)
@@ -17,5 +20,8 @@ flowchart LR
     D --- E[EDGE02]
     subgraph SITE02
     E[EDGE02]
+    end
+    subgraph SITE04
+    G[EDGE04]
     end
 ```
