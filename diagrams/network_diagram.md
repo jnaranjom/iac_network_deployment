@@ -13,11 +13,13 @@ flowchart LR
     F[EDGE03]
     end
     A[EDGE01] --- B(PE01)
+    F[EDGE03] --- B(PE01)
     subgraph MPLS CORE
     B --- C(P01)
     C --- D(PE02)
     end
     D --- E[EDGE02]
+    D --- G[EDGE04]
     subgraph SITE02
     E[EDGE02]
     end
