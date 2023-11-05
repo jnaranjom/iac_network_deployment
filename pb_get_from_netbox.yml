@@ -1,0 +1,69 @@
+---
+- name: "PLAY - GET ITEMS FROM NETBOX SOT "
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    grapghql_url: "http://192.168.2.201:8800/graphql/"
+    api_url: "http://192.168.2.201:8800/api"
+
+  tasks:
+    - name: "SET_FACT QUERY STRING"
+      ansible.builtin.set_fact:
+        query_string: |
+          query {
+            device_list (name: "lab01-pe01"){
+              hostname: name
+              bgpsession_set {
+                remote_as {
+                  asn
+                }
+                remote_address {
+                  address
+                }
+                custom_fields
+              }
+              primary_ip4 {
+                address
+              }
+              platform {
+                name
+              }
+              device_type {
+                manufacturer {
+                  name
+                }
+              }
+              interfaces {
+                name
+                vrf {
+                  name
+                }
+                description
+                ip_addresses {
+                  address
+                }
+                custom_fields
+              }
+              config_context
+            }
+          }
+
+
+    - name: "RETRIEVE DATA FROM GRAPHQL"
+      ansible.builtin.uri:
+        url: "{{ grapghql_url }}"
+        method: POST
+        headers:
+          content-type: "application/json"
+          Authorization: Token abc779e1f81ecebf1a32ad0b94d253672b801470
+        body_format: json
+        body:
+          query: "{{ query_string }}"
+      connection: local
+      register: graphql_result
+
+    - name: "DEBUG RESULT"
+      ansible.builtin.debug:
+        msg: "{{ graphql_result['json']['data']['device_list'] }}"
