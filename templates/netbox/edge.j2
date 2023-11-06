@@ -1,0 +1,90 @@
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname {{ inventory_hostname }}
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+username admin privilege 15 secret admin
+!
+!
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+{% for interface in attributes['interfaces'] %}
+interface {{ interface['name'] }}
+{% include 'configlets/interfaces/description.j2' %}
+{% if interface['vrf'] %}
+  ip vrf forwarding {{ interface['vrf']['name'] }}
+{% endif %}
+{% if interface['ip_addresses'] | length > 0 %}
+{% include 'configlets/interfaces/ip_address.j2' %}
+{% endif %}
+
+{% if interface['custom_fields'] is defined %}
+{% include 'configlets/interfaces/custom_fields.j2' %}
+{% endif %}
+{% if interface['enabled'] %}
+  no shutdown
+{% endif %}
+!
+{% endfor %}
+!
+!
+{% if attributes['config_context']['bgp'] is defined %}
+{% include 'configlets/bgp/bgp_edge.j2' %}
+{% endif %}
+!
+router ospf {{ attributes['config_context']['ospf']['process_id'] }}
+ router-id {{ attributes['config_context']['ospf']['router_id'] }}
+!
+ip forward-protocol nd
+!
+!
+!
+no ip http server
+no ip http secure-server
+ip scp server enable
+!
+!
+{% for server in attributes['config_context']['ntp']['servers'] %}
+{% if server['prefer'] %}
+ntp server {{ server['ipv4_host'] }} prefer
+{% else %}
+ntp server {{ server['ipv4_host'] }}
+{% endif %}
+{% endfor %}
+!
+control-plane
+!
+!
+end

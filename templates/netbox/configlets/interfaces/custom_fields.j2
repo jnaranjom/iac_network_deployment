@@ -1,0 +1,6 @@
+{% if interface['custom_fields']['ospf']  %}
+  ip ospf {{ attributes['config_context']['ospf']['process_id'] }} area {{ attributes['config_context']['ospf']['area'] }}
+{% endif %}
+{% if interface['custom_fields']['mpls']  %}
+  mpls ip
+{% endif -%}

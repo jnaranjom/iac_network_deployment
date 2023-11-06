@@ -1,0 +1,27 @@
+router bgp {{ attributes['config_context']['bgp']['asn'] }}
+ bgp router-id interface {{ attributes['config_context']['bgp']['router_id'] }}
+ redistribute ospf {{ attributes['config_context']['ospf']['process_id'] }}
+{% for neighbor in attributes['bgpsession_set'] %}
+{%- if neighbor['custom_fields']['vrf'] is none  %}
+{% if neighbor['custom_fields']['address_family'] | unique | list == ['ipv4'] %}
+ neighbor {{ neighbor['remote_address']['address'] | ansible.utils.ipaddr('address') }} remote-as {{ neighbor['remote_as']['asn'] }}
+ neighbor {{ neighbor['remote_address']['address'] | ansible.utils.ipaddr('address') }} update-source Loopback0
+ no auto-summary
+!
+{% elif neighbor['custom_fields']['address_family'] | unique | list == ['ipv4', 'vpnv4'] %}
+ neighbor {{ neighbor['remote_address']['address'] | ansible.utils.ipaddr('address') }} remote-as {{ neighbor['remote_as']['asn'] }}
+ neighbor {{ neighbor['remote_address']['address'] | ansible.utils.ipaddr('address') }} update-source Loopback0
+ no auto-summary
+!
+ address-family vpnv4
+   neighbor {{ neighbor['remote_address']['address'] | ansible.utils.ipaddr('address') }} activate
+   neighbor {{ neighbor['remote_address']['address'] | ansible.utils.ipaddr('address') }} send-community extended
+{% endif %}
+{% else %}
+
+ address-family ipv4 vrf CUST1_VRF
+   neighbor {{ neighbor['remote_address']['address'] | ansible.utils.ipaddr('address') }} remote-as {{ neighbor['remote_as']['asn'] }}
+!
+{% endif %}
+!
+{% endfor %}

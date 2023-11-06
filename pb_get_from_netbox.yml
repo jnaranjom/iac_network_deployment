@@ -13,8 +13,11 @@
       ansible.builtin.set_fact:
         query_string: |
           query {
-            device_list (name: "lab01-pe01"){
+            device_list {
               hostname: name
+              role {
+                name
+              }
               bgpsession_set {
                 remote_as {
                   asn
@@ -37,6 +40,7 @@
               }
               interfaces {
                 name
+                enabled
                 vrf {
                   name
                 }
@@ -50,8 +54,7 @@
             }
           }
 
-
-    - name: "RETRIEVE DATA FROM GRAPHQL"
+    - name: "RETRIEVE DATA FROM GRAPHQL API"
       ansible.builtin.uri:
         url: "{{ grapghql_url }}"
         method: POST
@@ -64,6 +67,19 @@
       connection: local
       register: graphql_result
 
-    - name: "DEBUG RESULT"
-      ansible.builtin.debug:
-        msg: "{{ graphql_result['json']['data']['device_list'] }}"
+    - name: "GENERATE INVENTORY"
+      ansible.builtin.include_tasks: "tasks/task_generate_inventory_netbox.yml"
+      vars:
+        device_list: "{{ graphql_result['json']['data']['device_list'] }}"
+
+- name: "PLAY: RENDER DEVICE CONFIGURATION"
+  hosts: "devices"
+  connection: "network_cli"
+  gather_facts: false
+
+  tasks:
+    - name: "10: RENDER DEVICE CONFIGURATION"
+      ansible.builtin.template:
+        src: "templates/netbox/{{ role }}.j2"
+        dest: "configs/netbox/{{ inventory_hostname }}.cfg"
+      delegate_to: "localhost"
