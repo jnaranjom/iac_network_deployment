@@ -26,7 +26,7 @@ flowchart TB
         NSOT OPS
         DATA MODELS"]
         direction LR
-            F ---- repos
+        F ---- repos
     end
     subgraph NETWORK INFRA
       C
