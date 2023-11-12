@@ -2,13 +2,11 @@
 
 ```mermaid
 flowchart TB
-    A[(MongoDB Cloud Atlas)]
-    B[[FastAPI]]
+    A[(Nautobot)]
     D(Ansible)
     E[[Network Devices]]
     F(((ENGINEER)))
     G(GRAFANA)
-    H(JENKINS)
     I(GITHUB)
     subgraph BACKEND - SoT
         B --> A
