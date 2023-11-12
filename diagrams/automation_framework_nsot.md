@@ -22,10 +22,11 @@ flowchart TB
       A --- A3
       A --- F 
     end
-    subgraph NETWORK INFRA
-      C
-    end
     subgraph DEPLOYMENT
       B
     end
+    subgraph NETWORK INFRA
+      C
+    end
+
 
