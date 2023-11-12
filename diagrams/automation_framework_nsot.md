@@ -14,8 +14,8 @@ flowchart TB
     D -.- A
     D -.- F
     D -.- B
-    B -.- C
-    B -.- A
+    B --- C
+    B --- A
     subgraph NSoT
       A --- A1
       A --- A2
