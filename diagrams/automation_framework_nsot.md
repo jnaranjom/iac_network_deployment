@@ -5,7 +5,7 @@ flowchart TB
     A[(Nautobot)]
     A1(IPAM)
     A2(DCIM)
-    A3(DATA MODELS)
+    A3(Data Models)
     B(Ansible)
     C[[Network Devices]]
     D(((ENGINEER)))
@@ -13,7 +13,7 @@ flowchart TB
     F(GITHUB)
     F1(NET DEPLOY)
     F2(NSOT OPS)
-    F3(DATA MODELS)
+    F3(Data Models)
     D ---> A
     D ---> F
     D ---> B
