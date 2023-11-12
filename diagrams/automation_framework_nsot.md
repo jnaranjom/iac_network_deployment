@@ -25,8 +25,8 @@ flowchart TB
     end
     D -.- B
     D -.- F
-    B --- A
-    B --- F
+    B --- NSoT
+    B --- OBSERVABILITY
     A -.- A1
     subgraph INFRA[NETWORK INFRASTRUCTURE]
       C
