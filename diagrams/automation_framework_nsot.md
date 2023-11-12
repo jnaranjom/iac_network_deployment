@@ -11,11 +11,11 @@ flowchart TB
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
-    D ---> A
-    D ---> F
-    D ---> B
-    B ---> C
-    B --- A
+    D -.- A
+    D -.- F
+    D -.- B
+    B -.- C
+    B -.- A
     subgraph NSoT
       A --- A1
       A --- A2
