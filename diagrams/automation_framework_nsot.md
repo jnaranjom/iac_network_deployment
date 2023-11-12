@@ -29,10 +29,10 @@ flowchart TB
     B --- A
     B --- F
     A -.- A1
-    subgraph NETWORK INFRA
+    subgraph NETWORK_INFRA
       C
     end
     B --- C
-    style NETWORK INFRA color:#f66
+    style NETWORK_INFRA color:#f66
 
 
