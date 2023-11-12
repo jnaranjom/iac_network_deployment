@@ -9,6 +9,10 @@ flowchart TB
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
+    subgraph OBSERVABILITY
+      direction LR
+      D --- E
+    end
     subgraph NSoT
       Components["IPAM
       DCIM"]
