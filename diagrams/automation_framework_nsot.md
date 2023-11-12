@@ -13,6 +13,11 @@ flowchart TB
     F(GITHUB)
     F1(NETWORK_DEPLOYMENT REPO)
     F2(NSOT OPERATIONS REPO)
+    subgraph AUTOMATION DEPLOYMENT
+      B
+    end
+     B ---> A
+     B ---> F
     subgraph NETWORK SOURCE OF TRUTH
       A --- A1
       A --- A2
