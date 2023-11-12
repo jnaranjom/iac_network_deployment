@@ -3,19 +3,17 @@
 ```mermaid
 flowchart TB
     A[(Nautobot)]
-    A1(IPAM)
-    A2(DCIM)
-    A3(Data Models)
+    A1(Data Models)
     B(Ansible)
     C[[Network Devices]]
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
     subgraph PLATFORM
-      A --- A1
-      A --- A2
-      A --- A3
-      A --- F 
+      Components["'IPAM
+      DCIM
+      DATA MODELS'"]
+      A -.- Components
     end
     D -.- B
     D -.- F
