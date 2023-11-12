@@ -21,8 +21,8 @@ flowchart TB
       A --- A3
     end
     subgraph VERSION CONTROL
-      F1 --- F
-      F2 --- F
+      F --- F1
+      F --- F2
     end
     subgraph NETWORK INFRASTRUCTURE
       C
