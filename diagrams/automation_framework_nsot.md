@@ -16,7 +16,7 @@ flowchart TB
       E
     end
     D -.- E
-    subgraph NSoT
+    subgraph NSoT [NSoT]
       Components["IPAM
       DCIM"]
       A -.- Components
