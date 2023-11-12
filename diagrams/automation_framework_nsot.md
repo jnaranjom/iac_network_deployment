@@ -34,7 +34,7 @@ flowchart TB
     B --- C
     D -.- E
     style INFRA fill:#bbf,stroke:blue,stroke-width:2px
-    style D fill:orange
+    style D fill:crimson
     linkStyle 7 stroke:blue
 
 
