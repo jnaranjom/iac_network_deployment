@@ -11,8 +11,9 @@ flowchart TB
     F(GITHUB)
     subgraph OBSERVABILITY
       direction LR
-      D --- E
+      E
     end
+    D -.- E
     subgraph NSoT
       Components["IPAM
       DCIM"]
