@@ -20,8 +20,8 @@ flowchart TB
     subgraph DEPLOYMENT
       B
     end
-    D -.- A
     D -.- B
+    D -.- A
     D -.- F
     B --- C
     B --- A
