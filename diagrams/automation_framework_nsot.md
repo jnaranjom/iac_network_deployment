@@ -11,7 +11,7 @@ flowchart TB
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
-    subgraph OBSERVABILITY
+    subgraph OB[OBSERVABILITY]
       direction LR
       E
     end
@@ -20,13 +20,13 @@ flowchart TB
       DCIM"]
       A -.- Components
     end
-    subgraph VERSION CONTROL
+    subgraph GITHUB[VERSION CONTROL]
       F -.- A1
     end
     D -.- NSoT
-    D -.- VERSION CONTROL
+    D -.- GITHUB
     B --- NSoT
-    B --- OBSERVABILITY
+    B --- OB
     A -.- A1
     subgraph INFRA[NETWORK INFRASTRUCTURE]
       C
