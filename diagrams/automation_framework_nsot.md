@@ -21,7 +21,6 @@ flowchart TB
       B
     end
     D -.- B
-    D -.- A
     D -.- F
     B --- C
     B --- A
