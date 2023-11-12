@@ -28,11 +28,12 @@ flowchart TB
     B --- A
     B --- F
     A -.- A1
-    subgraph NETWORK_INFRA
+    subgraph NETWORK INFRA
       C
     end
     B --- C
     D -.- E
+    style NETWORK INFRA fill:#f9f,stroke:#333,stroke-width:4px
     linkStyle 7 stroke:blue
 
 
