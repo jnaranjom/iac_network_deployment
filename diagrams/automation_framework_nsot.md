@@ -14,6 +14,7 @@ flowchart TB
     F1(NETWORK_DEPLOYMENT REPO)
     F2(NSOT OPERATIONS REPO)
     D ---> A
+    D ---> F
     subgraph NETWORK SOURCE OF TRUTH
       A --- A1
       A --- A2
