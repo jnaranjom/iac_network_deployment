@@ -20,8 +20,8 @@ flowchart TB
     end
     D -.- B
     D -.- F
-    B --- NSoT
-    B --- VERSION CONTROL
+    B --- A
+    B --- F
     subgraph NETWORK INFRA
       C
     end
