@@ -15,7 +15,6 @@ flowchart TB
       direction LR
       E
     end
-    D -.- E
     subgraph NSoT [NSoT]
       Components["IPAM
       DCIM"]
@@ -33,6 +32,7 @@ flowchart TB
       C
     end
     B --- C
+    D -.- E
     linkStyle 8 stroke:blue
 
 
