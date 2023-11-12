@@ -33,5 +33,6 @@ flowchart TB
       C
     end
     B --- C
+    style NETWORK INFRA color:#f66
 
 
