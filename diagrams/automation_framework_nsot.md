@@ -28,7 +28,7 @@ flowchart TB
     B --- A
     B --- F
     A -.- A1
-    subgraph INFRA[NETWORK INFRA]
+    subgraph INFRA[NETWORK INFRASTRUCTURE]
       C
     end
     B --- C
