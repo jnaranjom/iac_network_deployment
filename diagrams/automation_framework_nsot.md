@@ -22,9 +22,9 @@ flowchart TB
       A --- A3
     end
     subgraph VERSION CONTROL
-       repos["'NET DEPLOY
+       repos["NET DEPLOY
        NSOT OPS
-       DATA MODELS'"]
+       DATA MODELS"]
        F ---- repos
     end
     subgraph NETWORK INFRA
