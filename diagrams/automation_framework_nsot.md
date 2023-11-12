@@ -33,7 +33,7 @@ flowchart TB
     end
     B --- C
     D -.- E
-    style INFRA fill:#bbf,stroke:#f66,stroke-width:2px
+    style INFRA fill:#bbf,stroke:blue,stroke-width:2px
     linkStyle 7 stroke:blue
 
 
