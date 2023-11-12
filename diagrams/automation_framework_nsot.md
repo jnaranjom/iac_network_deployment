@@ -22,6 +22,7 @@ flowchart TB
       A --- A3
     end
     subgraph VERSION CONTROL
+       direction LR
        repos["NET DEPLOY
        NSOT OPS
        DATA MODELS"]
