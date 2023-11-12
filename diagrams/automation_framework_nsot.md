@@ -25,9 +25,10 @@ flowchart TB
       A --- A3
     end
     subgraph VERSION CONTROL
-      F --- F1
-      F --- F2
-      F --- F3
+       repos["'F1
+       F2
+       F3'"]
+       F ---- repos
     end
     subgraph NETWORK INFRA
       C
