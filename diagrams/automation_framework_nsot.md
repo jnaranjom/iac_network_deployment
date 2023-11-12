@@ -23,9 +23,9 @@ flowchart TB
     end
     subgraph VERSION CONTROL
        direction LR
-       repos["NET DEPLOY
-       NSOT OPS
-       DATA MODELS"]
+           repos["NET DEPLOY
+           NSOT OPS
+           DATA MODELS"]
        F ---- repos
     end
     subgraph NETWORK INFRA
