@@ -9,7 +9,7 @@ flowchart TB
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
-    subgraph PLATFORM
+    subgraph NSoT
       Components["'IPAM
       DCIM
       DATA MODELS'"]
