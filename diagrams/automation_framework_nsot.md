@@ -3,7 +3,7 @@
 ```mermaid
 flowchart TB
     A[(Nautobot)]
-    A1(Data Models)
+    A1["Data Models Templates Playbooks"]
     B(Ansible)
     C[[Network Devices]]
     D(((ENGINEER)))
