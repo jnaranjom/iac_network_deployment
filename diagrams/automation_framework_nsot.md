@@ -13,12 +13,12 @@ flowchart TB
     F(GITHUB)
     F1(NETWORK_DEPLOYMENT REPO)
     F2(NSOT OPERATIONS REPO)
-    subgraph VERSION CONTROL
-      F1 --- F
-      F2 --- F
-    end
     subgraph NETWORK SOURCE OF TRUTH
       A --- A1
       A --- A2
       A --- A3
+    end
+    subgraph VERSION CONTROL
+      F1 --- F
+      F2 --- F
     end
