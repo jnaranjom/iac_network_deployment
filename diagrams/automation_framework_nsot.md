@@ -26,6 +26,6 @@ flowchart TB
     subgraph NETWORK INFRA
       C
     end
-    A --- C
+    B --- C
 
 
