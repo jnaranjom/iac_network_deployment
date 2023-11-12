@@ -22,8 +22,9 @@ flowchart TB
       F1 --- F
       F2 --- F
     end
+    B ---> A
+    B ---> F
     subgraph AUTOMATION DEPLOYMENT
       B
     end
-     B ---> A
-     B ---> F
+
