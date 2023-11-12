@@ -11,8 +11,9 @@ flowchart TB
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
-    F1(NETWORK_DEPLOYMENT REPO)
-    F2(NSOT OPERATIONS REPO)
+    F1(NET DEPLOY)
+    F2(NSOT OPS)
+    F3(DATA MODELS)
     D ---> A
     D ---> F
     D ---> B
