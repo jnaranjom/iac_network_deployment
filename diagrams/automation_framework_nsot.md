@@ -19,7 +19,7 @@ flowchart TB
     D ---> B
     B ---> C
     B --- A
-    subgraph NETWORK SOURCE OF TRUTH
+    subgraph NSoT
       A --- A1
       A --- A2
       A --- A3
@@ -29,10 +29,10 @@ flowchart TB
       F --- F2
       F --- F3
     end
-    subgraph NETWORK INFRASTRUCTURE
+    subgraph NETWORK INFRA
       C
     end
-    subgraph AUTOMATION DEPLOYMENT
+    subgraph DEPLOYMENT
       B
     end
 
