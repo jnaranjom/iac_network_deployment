@@ -15,6 +15,7 @@ flowchart TB
     F2(NSOT OPERATIONS REPO)
     D ---> A
     D ---> F
+    D ---> B
     subgraph NETWORK SOURCE OF TRUTH
       A --- A1
       A --- A2
@@ -26,6 +27,7 @@ flowchart TB
     end
     subgraph NETWORK INFRASTRUCTURE
       C
+      D ---> C
     end
     subgraph AUTOMATION DEPLOYMENT
       B
