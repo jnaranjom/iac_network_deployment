@@ -25,9 +25,6 @@ flowchart TB
       DATA MODELS"]
       F ---- repos
     end
-    subgraph VERSION CONTROL
-
-    end
     subgraph NETWORK INFRA
       C
     end
