@@ -13,7 +13,6 @@ flowchart TB
       Components["IPAM
       DCIM"]
       A -.- Components
-      A -.- A1
     end
     subgraph VERSION CONTROL
       F
@@ -22,6 +21,7 @@ flowchart TB
     D -.- F
     B --- A
     B --- F
+    A -.- A1
     subgraph NETWORK INFRA
       C
     end
