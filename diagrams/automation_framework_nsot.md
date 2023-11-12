@@ -27,7 +27,6 @@ flowchart TB
     end
     subgraph NETWORK INFRASTRUCTURE
       C
-      D ---> C
     end
     subgraph AUTOMATION DEPLOYMENT
       B
