@@ -33,7 +33,7 @@ flowchart TB
     end
     B --- C
     D -.- E
-    linkStyle 8 stroke:blue
+    linkStyle 7 stroke:blue
 
 
 
