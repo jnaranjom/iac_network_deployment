@@ -10,10 +10,10 @@ flowchart TB
     E(GRAFANA)
     F(GITHUB)
     subgraph NSoT
-      Components["'IPAM
-      DCIM
-      DATA MODELS'"]
+      Components["IPAM
+      DCIM"]
       A -.- Components
+      A -.- A1
     end
     subgraph VERSION CONTROL
       F
