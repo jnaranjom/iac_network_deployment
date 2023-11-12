@@ -11,14 +11,11 @@ flowchart TB
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
-    subgraph NSoT
+    subgraph PLATFORM
       A --- A1
       A --- A2
       A --- A3
       A --- F 
-    end
-    subgraph DEPLOYMENT
-      B
     end
     D -.- B
     D -.- F
