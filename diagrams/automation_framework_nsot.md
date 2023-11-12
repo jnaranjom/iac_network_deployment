@@ -3,6 +3,9 @@
 ```mermaid
 flowchart TB
     A[(Nautobot)]
+    A1(IPAM)
+    A2(DCIM)
+    A3(DATA MODELS)
     B(Ansible)
     C[[Network Devices]]
     D(((ENGINEER)))
@@ -14,4 +17,8 @@ flowchart TB
       F1 --- F
       F2 --- F
     end
-
+    subgraph NETWORK SOURCE OF TRUTH
+      A --- A1
+      A --- A2
+      A --- A3
+    end
