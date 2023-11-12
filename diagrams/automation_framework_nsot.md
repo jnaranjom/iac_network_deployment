@@ -27,6 +27,8 @@ flowchart TB
     end
     D -.- NSoT
     D -.- GITHUB
+    D -.- DEPLOY
+    D -.- OB
     B --- NSoT
     B --- OB
     A -.- A1
