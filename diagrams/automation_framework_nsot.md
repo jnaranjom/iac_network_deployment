@@ -23,8 +23,8 @@ flowchart TB
     subgraph VERSION CONTROL
       F -.- A1
     end
-    D -.- B
-    D -.- F
+    D -.- NSoT
+    D -.- VERSION CONTROL
     B --- NSoT
     B --- OBSERVABILITY
     A -.- A1
