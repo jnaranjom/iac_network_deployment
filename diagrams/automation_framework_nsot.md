@@ -31,7 +31,7 @@ flowchart TB
     subgraph INFRA[NETWORK INFRASTRUCTURE]
       C
     end
-    B ----- INFRA
+    B --- INFRA
     D -.- E
     style INFRA fill:#bbf,stroke:blue
     linkStyle 7 stroke:blue
