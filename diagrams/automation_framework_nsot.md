@@ -24,7 +24,7 @@ flowchart TB
     subgraph VERSION CONTROL
        repos["'NET DEPLOY
        NSOT OPS
-       DATA MODELS]
+       DATA MODELS'"]
        F ---- repos
     end
     subgraph NETWORK INFRA
