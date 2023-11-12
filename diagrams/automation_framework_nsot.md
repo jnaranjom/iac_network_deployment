@@ -11,8 +11,10 @@ flowchart TB
     C[[Network Devices]]
     E(GRAFANA)
     F(GITHUB)
+    subgraph DEPLOY[AUTOMATION DEPLOYMENT]
+      B
+    end
     subgraph OB[OBSERVABILITY]
-      direction LR
       E
     end
     subgraph NSoT [NSoT]
