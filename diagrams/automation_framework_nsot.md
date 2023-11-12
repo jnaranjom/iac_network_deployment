@@ -15,11 +15,13 @@ flowchart TB
       DATA MODELS'"]
       A -.- Components
     end
+    subgraph VERSION CONTROL
+      F
+    end
     D -.- B
     D -.- F
-    B --- C
-    B --- A
-    B --- F
+    B --- NSoT
+    B --- VERSION CONTROL
     subgraph NETWORK INFRA
       C
     end
