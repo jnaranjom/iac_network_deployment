@@ -31,8 +31,9 @@ flowchart TB
     A -.- A1
     subgraph NETWORK_INFRA
       C
+    style color:#f66
     end
     B --- C
-    style NETWORK_INFRA color:#f66
+
 
 
