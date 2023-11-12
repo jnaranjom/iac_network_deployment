@@ -18,6 +18,7 @@ flowchart TB
     D ---> F
     D ---> B
     B ---> C
+    B --- A
     subgraph NETWORK SOURCE OF TRUTH
       A --- A1
       A --- A2
