@@ -11,7 +11,7 @@ flowchart TB
     F1(NETWORK_DEPLOYMENT REPO)
     F2(NSOT OPERATIONS REPO)
     subgraph VERSION CONTROL
-    F ---> F1
-    F ---> F2
+    F1 ---> F
+    F2 ---> F
     end
 
