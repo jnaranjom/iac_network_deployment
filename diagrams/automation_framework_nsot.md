@@ -11,9 +11,6 @@ flowchart TB
     D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
-    F1(NET DEPLOY)
-    F2(NSOT OPS)
-    F3(Data Models)
     D ---> A
     D ---> F
     D ---> B
@@ -25,9 +22,9 @@ flowchart TB
       A --- A3
     end
     subgraph VERSION CONTROL
-       repos[F1
-       F2
-       F3]
+       repos["'NET DEPLOY
+       NSOT OPS
+       DATA MODELS]
        F ---- repos
     end
     subgraph NETWORK INFRA
