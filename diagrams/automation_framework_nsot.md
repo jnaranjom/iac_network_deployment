@@ -33,6 +33,7 @@ flowchart TB
       C
     end
     B --- C
+    linkStyle 8 stroke:blue
 
 
 
