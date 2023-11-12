@@ -2,13 +2,13 @@
 
 ```mermaid
 flowchart TB
+    D(((ENGINEER)))
     A[(Nautobot)]
     A1["Data Models
     Templates
     Playbooks"]
     B(Ansible)
     C[[Network Devices]]
-    D(((ENGINEER)))
     E(GRAFANA)
     F(GITHUB)
     subgraph OB[OBSERVABILITY]
