@@ -22,14 +22,13 @@ flowchart TB
       A -.- Components
     end
     subgraph VERSION CONTROL
-      F
+      F -.- A1
     end
     D -.- B
     D -.- F
     B --- A
     B --- F
     A -.- A1
-    F -.- A1
     subgraph NETWORK INFRA
       C
     end
