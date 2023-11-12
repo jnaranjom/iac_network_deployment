@@ -22,11 +22,11 @@ flowchart TB
       A --- A3
     end
     subgraph VERSION CONTROL
-       direction LR
-           repos["NET DEPLOY
-           NSOT OPS
-           DATA MODELS"]
-           F ---- repos
+        repos["NET DEPLOY
+        NSOT OPS
+        DATA MODELS"]
+        direction LR
+            F ---- repos
     end
     subgraph NETWORK INFRA
       C
