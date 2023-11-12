@@ -20,13 +20,13 @@ flowchart TB
       A --- A1
       A --- A2
       A --- A3
+      repos["NET DEPLOY
+      NSOT OPS
+      DATA MODELS"]
+      F ---- repos
     end
     subgraph VERSION CONTROL
-        repos["NET DEPLOY
-        NSOT OPS
-        DATA MODELS"]
-        direction LR
-        F ---- repos
+
     end
     subgraph NETWORK INFRA
       C
