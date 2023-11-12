@@ -20,10 +20,7 @@ flowchart TB
       A --- A1
       A --- A2
       A --- A3
-      repos["NET DEPLOY
-      NSOT OPS
-      DATA MODELS"]
-      F ---- repos
+      A --- F 
     end
     subgraph NETWORK INFRA
       C
