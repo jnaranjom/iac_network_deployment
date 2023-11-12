@@ -26,7 +26,7 @@ flowchart TB
            repos["NET DEPLOY
            NSOT OPS
            DATA MODELS"]
-       F ---- repos
+           F ---- repos
     end
     subgraph NETWORK INFRA
       C
