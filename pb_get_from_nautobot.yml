@@ -46,17 +46,15 @@
         dest: "configs/nautobot/{{ inventory_hostname }}.cfg"
       delegate_to: "localhost"
 
-    - name: "APPLY CONFIG"
+    - name: "APPLY CONFIG IOSXE DEVICES"
       napalm.napalm.napalm_install_config:
         dev_os: "ios"
         config_file: "configs/nautobot/{{ inventory_hostname }}.cfg"
         commit_changes: true
         replace_config: false
-      when:
-        - ("edge03" not in inventory_hostname)
-        - ("edge04" not in inventory_hostname)
+      when: ( model != "iol" )
 
-    - name: "TASK - REPLACE EXISTING CONFIGURATION"
+    - name: "APPLY CONFIG IOL DEVICES"
       cisco.ios.ios_config:
         src: "templates/nautobot/{{ role }}_{{ model }}.j2"
-      when: ("edge03" in inventory_hostname) or ("edge04" in inventory_hostname)
+      when: ( model == "iol" )
