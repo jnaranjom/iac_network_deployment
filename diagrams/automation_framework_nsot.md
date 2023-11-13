@@ -25,8 +25,8 @@ flowchart TB
     subgraph GITHUB[VERSION CONTROL]
       F -.- A1
     end
-    D -.- GITHUB
     D -.- NSoT
+    D -.- GITHUB
     D -.- DEPLOY
     D -.- OB
     B --- NSoT
