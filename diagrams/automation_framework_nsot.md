@@ -11,7 +11,7 @@ flowchart TB
     C[[Network Devices]]
     E(GRAFANA)
     F(GITHUB)
-    subgraph DEPLOY[AUTOMATION DEPLOYMENT]
+    subgraph DEPLOY[DEPLOYMENT]
       B
     end
     subgraph OB[OBSERVABILITY]
@@ -29,7 +29,7 @@ flowchart TB
     D -.- GITHUB
     D -.- DEPLOY
     D -.- OB
-    B --- A
+    B --- NSoT
     A -.- A1
     subgraph INFRA[NETWORK INFRASTRUCTURE]
       C
