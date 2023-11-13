@@ -1,0 +1,68 @@
+          query {
+            bgp_peerings {
+              endpoints {
+                peer {
+                  routing_instance {
+                    device {
+                      name
+                    }
+                  }
+                }
+                description
+                source_ip {
+                  address
+                }
+                autonomous_system {
+                  asn
+                }
+              }
+              status {
+                name
+              }
+            }
+            devices {
+              hostname: name
+              primary_ip4 {
+                address
+              }
+              platform {
+                name
+              }
+              device_type {
+                model
+              }
+              role {
+                name
+              }
+              interfaces {
+                name
+                description
+                ip_addresses {
+                  address
+                }
+                enabled
+                vrf {
+                  name
+                }
+                cf_mpls
+                cf_ospf
+                cf_management
+              }
+              config_context
+              bgp_routing_instances {
+                autonomous_system {
+                  asn
+                }
+              }
+              vrfs {
+                name
+                rd
+                import_targets {
+                  name
+                }
+                export_targets {
+                  name
+                }
+              }
+            }
+          }
