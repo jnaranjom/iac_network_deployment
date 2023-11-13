@@ -29,8 +29,8 @@ flowchart TB
     D -.- GITHUB
     D -.- DEPLOY
     D -.- OB
-    DEPLOY --- NSoT
-    OB --- NSoT
+    B --- A
+    E --- A
     A -.- A1
     subgraph INFRA[NETWORK INFRASTRUCTURE]
       C
