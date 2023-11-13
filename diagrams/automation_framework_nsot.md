@@ -30,7 +30,6 @@ flowchart TB
     D -.- DEPLOY
     D -.- OB
     B --- NSoT
-    B --- OB
     A -.- A1
     subgraph INFRA[NETWORK INFRASTRUCTURE]
       C
