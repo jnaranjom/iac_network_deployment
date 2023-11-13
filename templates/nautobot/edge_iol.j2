@@ -1,0 +1,130 @@
+!
+
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname {{ inventory_hostname }}
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip domain name network.local
+ip cef
+login on-success log
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+memory free low-watermark processor 71497
+username admin privilege 15 secret admin
+!
+redundancy
+!
+!
+ip ssh version 2
+ip scp server enable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+{% for interface in attributes['interfaces'] %}
+interface {{ interface['name'] }}
+{% include 'configlets/interfaces/description.j2' %}
+{% if interface['vrf'] %}
+  ip vrf forwarding {{ interface['vrf']['name'] }}
+{% endif %}
+{% if interface['ip_addresses'] | length > 0 %}
+{% include 'configlets/interfaces/ip_address.j2' %}
+{% endif %}
+
+{% if interface['cf_mpls'] is defined or interface['cf_ospf'] is defined %}
+{% include 'configlets/interfaces/custom_fields.j2' %}
+{% endif %}
+{% if interface['enabled'] %}
+  no shutdown
+{% endif %}
+!
+{% endfor %}
+!
+!
+{% if attributes['bgp_routing_instances'] is defined %}
+{% include 'configlets/bgp/bgp.j2' %}
+{% endif %}
+!
+{% if attributes['config_context']['ospf'] is defined %}
+{% include 'configlets/ospf/ospf.j2' %}
+{% endif %}
+!
+ip forward-protocol nd
+!
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip http client source-interface Ethernet0/0
+!
+!
+{% if attributes['config_context']['ntp'] is defined %}
+{% include 'configlets/services/ntp.j2' %}
+{% endif %}
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+ stopbits 1
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end

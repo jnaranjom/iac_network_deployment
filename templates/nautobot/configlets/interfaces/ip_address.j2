@@ -1,0 +1,1 @@
+  ip address {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }} {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('netmask') }}

@@ -1,0 +1,6 @@
+router ospf {{ attributes['config_context']['ospf']['process_id'] }}
+{% for interface in attributes['interfaces'] %}
+{% if interface['name'] == "Loopback0" %}
+  router-id {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }}
+{% endif %}
+{% endfor %}

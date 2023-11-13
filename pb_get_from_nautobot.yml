@@ -1,0 +1,131 @@
+---
+- name: "PLAY - GET ITEMS FROM NAUTOBO SOT"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    grapghql_url: "http://192.168.2.201:9000/api/graphql/"
+
+
+  tasks:
+    - name: "SET_FACT QUERY STRING"
+      ansible.builtin.set_fact:
+        query_string: |
+          query {
+            bgp_peerings {
+              endpoints {
+                peer {
+                  routing_instance {
+                    device {
+                      name
+                    }
+                  }
+                }
+                description
+                source_ip {
+                  address
+                }
+                autonomous_system {
+                  asn
+                }
+              }
+              status {
+                name
+              }
+            }
+            devices {
+              hostname: name
+              primary_ip4 {
+                address
+              }
+              platform {
+                name
+              }
+              device_type {
+                model
+              }
+              role {
+                name
+              }
+              interfaces {
+                name
+                description
+                ip_addresses {
+                  address
+                }
+                enabled
+                vrf {
+                  name
+                }
+                cf_mpls
+                cf_ospf
+                cf_management
+              }
+              config_context
+              bgp_routing_instances {
+                autonomous_system {
+                  asn
+                }
+              }
+              vrfs {
+                name
+                rd
+                import_targets {
+                  name
+                }
+                export_targets {
+                  name
+                }
+              }
+            }
+          }
+
+    - name: "RETRIEVE DATA FROM GRAPHQL API"
+      ansible.builtin.uri:
+        url: "{{ grapghql_url }}"
+        method: POST
+        headers:
+          content-type: "application/json"
+          Authorization: Token 531c20c8fb27b2d60f6f8608fabec819437adfa5
+        body_format: json
+        body:
+          query: "{{ query_string }}"
+      connection: local
+      register: graphql_result
+
+    - name: "DEBUG RESULT"
+      ansible.builtin.debug:
+        msg: "{{ graphql_result['json']['data'] }}"
+
+    - name: "GENERATE INVENTORY"
+      ansible.builtin.include_tasks: "tasks/task_generate_inventory_nautobot.yml"
+      vars:
+        devices: "{{ graphql_result['json']['data']['devices'] }}"
+
+- name: "PLAY: RENDER DEVICE CONFIGURATION"
+  hosts: "devices"
+  connection: "network_cli"
+  gather_facts: false
+
+  tasks:
+    - name: "10: RENDER DEVICE CONFIGURATION"
+      ansible.builtin.template:
+        src: "templates/nautobot/{{ role }}_{{ model }}.j2"
+        dest: "configs/nautobot/{{ inventory_hostname }}.cfg"
+      delegate_to: "localhost"
+
+    - name: "APPLY CONFIG"
+      napalm.napalm.napalm_install_config:
+        dev_os: "ios"
+        config_file: "configs/nautobot/{{ inventory_hostname }}.cfg"
+        commit_changes: true
+        replace_config: false
+      when:
+        - ("edge03" not in inventory_hostname)
+        - ("edge04" not in inventory_hostname)
+
+    - name: "TASK - REPLACE EXISTING CONFIGURATION"
+      cisco.ios.ios_config:
+        src: "templates/nautobot/{{ role }}_{{ model }}.j2"
+      when: ("edge03" in inventory_hostname) or ("edge04" in inventory_hostname)
