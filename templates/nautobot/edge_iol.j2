@@ -89,6 +89,9 @@ interface {{ interface['name'] }}
 {% if attributes['bgp_routing_instances'] is defined %}
 {% include 'configlets/bgp/bgp.j2' %}
 {% endif %}
+{% if bgp_peerings is defined %}
+{% include 'configlets/bgp/bgp_peerings.j2' %}
+{% endif %}
 !
 {% if attributes['config_context']['ospf'] is defined %}
 {% include 'configlets/ospf/ospf.j2' %}

@@ -1,0 +1,30 @@
+---
+- name: "FIND OBJECT"
+  ansible.builtin.set_fact:
+    query_result: "{{ peering | community.general.json_query(query) }}"
+  vars:
+    query: "endpoints[].{local: peer.routing_instance.device.name, peer_ip: source_ip.address, peer_asn: autonomous_system.asn, description: description, af: address_families[].afi_safi[], vrf: address_families[].extra_attributes.vrf[] }"
+
+- name: "APPEND TO VPNV4/IPV4 LIST"
+  ansible.builtin.set_fact:
+    vpnv4_peerings: "{{ vpnv4_peerings | default([]) + [item] }}"
+  loop: "{{ query_result }}"
+  when: ( item['af'] == ['IPV4_UNICAST', 'VPNV4_UNICAST'] )
+
+- name: "APPEND TO IPV4 LIST"
+  ansible.builtin.set_fact:
+    ipv4_peerings: "{{ ipv4_peerings | default([]) + [item] }}"
+  loop: "{{ query_result }}"
+  when: ( item['af'] == ['IPV4_UNICAST'] and item['vrf'] == [] )
+
+- name: "APPEND TO IPV4 VRF LIST"
+  ansible.builtin.set_fact:
+    ipv4_vrf_peerings: "{{ ipv4_vrf_peerings | default([]) + [item] }}"
+  loop: "{{ query_result }}"
+  when: ( item['af'] == ['IPV4_UNICAST'] and item['vrf'] | length > 0 )
+
+- name: "FIND UNIQUE IPV4 VRFS"
+  ansible.builtin.set_fact:
+    vrfs: "{{ ipv4_vrf_peerings | community.general.json_query(query) }}"
+  vars:
+    query: "[].vrf[]"

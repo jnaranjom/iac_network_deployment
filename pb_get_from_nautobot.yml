@@ -12,7 +12,7 @@
       ansible.builtin.set_fact:
         query_string: "{{ lookup('ansible.builtin.file', 'vars/graphql/device_attributes.gql') }}"
 
-    - name: "RETRIEVE DATA FROM GRAPHQL API"
+    - name: "RETRIEVE DEVICE ATTRIBUTES FROM GRAPHQL API"
       ansible.builtin.uri:
         url: "{{ grapghql_url }}"
         method: POST
@@ -25,10 +25,6 @@
       connection: local
       register: graphql_result
 
-    - name: "DEBUG RESULT"
-      ansible.builtin.debug:
-        msg: "{{ graphql_result['json']['data'] }}"
-
     - name: "GENERATE INVENTORY"
       ansible.builtin.include_tasks: "tasks/task_generate_inventory_nautobot.yml"
       vars:
@@ -40,11 +36,55 @@
   gather_facts: false
 
   tasks:
-    - name: "10: RENDER DEVICE CONFIGURATION"
+    - name: "SET_FACT QUERY STRING"
+      ansible.builtin.set_fact:
+        query_string: "{{ lookup('ansible.builtin.file', 'vars/graphql/bgp_peerings.gql') }}"
+      delegate_to: "localhost"
+      run_once: true
+
+    - name: "RETRIEVE BGP PEERINGS GRAPHQL API"
+      ansible.builtin.uri:
+        url: "{{ grapghql_url }}"
+        method: POST
+        headers:
+          content-type: "application/json"
+          Authorization: Token 531c20c8fb27b2d60f6f8608fabec819437adfa5
+        body_format: json
+        body:
+          query: "{{ query_string }}"
+          variables:
+              {
+                "device_name": "{{ inventory_hostname }}"
+              }
+      delegate_to: localhost
+      register: bgp
+      vars:
+        grapghql_url: "http://192.168.2.201:9000/api/graphql/"
+
+    - name: "SET_FACT BGP PEERINGS"
+      ansible.builtin.set_fact:
+        bgp_peerings: "{{ bgp['json']['data']['bgp_peerings'] }}"
+      delegate_to: "localhost"
+
+    - name: "SET_FACT BGP PEERINGS"
+      ansible.builtin.include_tasks: "tasks/task_sort_bgp_peerings.yml"
+      loop: "{{ bgp_peerings }}"
+      loop_control:
+        loop_var: "peering"
+
+    - name: "10: RENDER DEVICE CONFIGURATION IOSXE"
       ansible.builtin.template:
-        src: "templates/nautobot/{{ role }}_{{ model }}.j2"
+        src: "templates/nautobot/{{ role }}.j2"
         dest: "configs/nautobot/{{ inventory_hostname }}.cfg"
       delegate_to: "localhost"
+      when: ( model != "iol" )
+
+    - name: "10: RENDER DEVICE CONFIGURATION IOL"
+      ansible.builtin.template:
+        src: "templates/nautobot/{{ role }}_iol.j2"
+        dest: "configs/nautobot/{{ inventory_hostname }}.cfg"
+      delegate_to: "localhost"
+      when: ( model == "iol" )
 
     - name: "APPLY CONFIG IOSXE DEVICES"
       napalm.napalm.napalm_install_config:

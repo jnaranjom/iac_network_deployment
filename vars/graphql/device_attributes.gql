@@ -1,25 +1,4 @@
           query {
-            bgp_peerings {
-              endpoints {
-                peer {
-                  routing_instance {
-                    device {
-                      name
-                    }
-                  }
-                }
-                description
-                source_ip {
-                  address
-                }
-                autonomous_system {
-                  asn
-                }
-              }
-              status {
-                name
-              }
-            }
             devices {
               hostname: name
               primary_ip4 {
