@@ -1,0 +1,18 @@
+ address-family ipv4
+{% for peering in vpnv4_peerings %}
+{% set peer_ip = peering['peer_ip'] | ansible.utils.ipaddr('address') %}
+{% if peering['local'] == inventory_hostname %}
+  neighbor {{ peer_ip }} remote-as {{ peering['peer_asn'] }}
+  neighbor {{ peer_ip }} description {{ peering['description'] }}
+  neighbor {{ peer_ip }} update-source Loopback0
+{% endif %}
+{% endfor %}
+!
+ address-family vpnv4
+{% for peering in vpnv4_peerings %}
+{% set peer_ip = peering['peer_ip'] | ansible.utils.ipaddr('address') %}
+{% if peering['local'] == inventory_hostname %}
+  neighbor {{ peer_ip }} activate
+  neighbor {{ peer_ip }} send-community extended
+{% endif %}
+{% endfor %}

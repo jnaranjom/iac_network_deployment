@@ -1,45 +1,9 @@
 {% if ipv4_peerings is defined %}
-{% for peering in ipv4_peerings %}
-{% set peer_ip = peering['peer_ip'] | ansible.utils.ipaddr('address') %}
-{% if peering['local'] == inventory_hostname %}
-  neighbor {{ peer_ip }} remote-as {{ peering['peer_asn'] }}
-  neighbor {{ peer_ip }} description {{ peering['description'] }}
-  neighbor {{ peer_ip }} allowas-in
+{% include 'configlets/bgp/bgp_peerings_ipv4.j2' %}
 {% endif %}
-{% endfor %}
-{% endif %}
-!
 {% if vpnv4_peerings is defined %}
- address-family ipv4
-{% for peering in vpnv4_peerings %}
-{% set peer_ip = peering['peer_ip'] | ansible.utils.ipaddr('address') %}
-{% if peering['local'] == inventory_hostname %}
-  neighbor {{ peer_ip }} remote-as {{ peering['peer_asn'] }}
-  neighbor {{ peer_ip }} description {{ peering['description'] }}
-  neighbor {{ peer_ip }} update-source Loopback0
+{% include 'configlets/bgp/bgp_peerings_vpnv4.j2' %}
 {% endif %}
-{% endfor %}
-!
- address-family vpnv4
-{% for peering in vpnv4_peerings %}
-{% set peer_ip = peering['peer_ip'] | ansible.utils.ipaddr('address') %}
-{% if peering['local'] == inventory_hostname %}
-  neighbor {{ peer_ip }} activate
-  neighbor {{ peer_ip }} send-community extended
-{% endif %}
-{% endfor %}
-{% endif %}
-!
 {% if ipv4_vrf_peerings is defined %}
-{% for vrf in vrfs %}
- address-family ipv4 vrf {{ vrf }}
-{% for peering in ipv4_vrf_peerings %}
-{% set peer_ip = peering['peer_ip'] | ansible.utils.ipaddr('address') %}
-{% if peering['local'] == inventory_hostname and vrf in peering['vrf'] %}
-  neighbor {{ peer_ip }} remote-as {{ peering['peer_asn'] }}
-  neighbor {{ peer_ip }} description {{ peering['description'] }}
-{% endif %}
-{% endfor %}
-!
-{% endfor %}
+{% include 'configlets/bgp/bgp_peerings_ipv4_vrf.j2' %}
 {% endif %}
