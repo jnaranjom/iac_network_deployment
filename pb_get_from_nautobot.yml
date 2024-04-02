@@ -86,15 +86,15 @@
       delegate_to: "localhost"
       when: ( model == "iol" )
 
-    - name: "APPLY CONFIG IOSXE DEVICES"
-      napalm.napalm.napalm_install_config:
-        dev_os: "ios"
-        config_file: "configs/nautobot/{{ inventory_hostname }}.cfg"
-        commit_changes: true
-        replace_config: false
-      when: ( model != "iol" )
+    # - name: "APPLY CONFIG IOSXE DEVICES"
+    #   napalm.napalm.napalm_install_config:
+    #     dev_os: "ios"
+    #     config_file: "configs/nautobot/{{ inventory_hostname }}.cfg"
+    #     commit_changes: true
+    #     replace_config: false
+    #   when: ( model != "iol" )
 
-    - name: "APPLY CONFIG IOL DEVICES"
-      cisco.ios.ios_config:
-        src: "templates/nautobot/{{ role }}_{{ model }}.j2"
-      when: ( model == "iol" )
+    # - name: "APPLY CONFIG IOL DEVICES"
+    #   cisco.ios.ios_config:
+    #     src: "templates/nautobot/{{ role }}_{{ model }}.j2"
+    #   when: ( model == "iol" )

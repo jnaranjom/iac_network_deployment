@@ -1,3 +1,4 @@
 ---
 collections:
   - name: napalm.napalm
+  - name: networktocode.nautobot
