@@ -1,0 +1,64 @@
+# inventory.yml file in YAML format
+# Example command line: ansible-inventory -v --list -i inventory.yml
+
+plugin: networktocode.nautobot.gql_inventory
+api_endpoint: "http://192.168.2.201:9000"
+token: "531c20c8fb27b2d60f6f8608fabec819437adfa5"
+validate_certs: False
+
+# query:
+#   devices:
+#     name:
+#     serial:
+#     role:
+#       name:
+#     interfaces:
+#       name:
+#       ip_addresses: address
+#     config_context:
+
+
+query:
+  devices:
+    name:
+    primary_ip4:
+      host:
+    platform:
+      name:
+    device_type:
+      model:
+    role:
+      name:
+    interfaces:
+      name:
+      description:
+      ip_addresses:
+        address:
+      enabled:
+      vrf:
+        name:
+      cf_mpls:
+      cf_ospf:
+      cf_management:
+    config_context:
+    bgp_routing_instances:
+      autonomous_system:
+        asn:
+    vrfs:
+      name:
+      rd:
+      import_targets:
+        name:
+      export_targets:
+        name:
+
+
+
+
+
+
+
+
+
+group_by:
+  - role.name

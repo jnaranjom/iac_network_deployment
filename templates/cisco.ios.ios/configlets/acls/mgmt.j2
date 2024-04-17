@@ -1,4 +1,0 @@
-ip access-list extended {{ device_acls['json']['name'] }}
-{% for entry in device_acls['json']['entries'] %}
-    {{ loop.index * 5 }} {{ entry['action'] }} {{ entry['protocol'] }} {{ entry['source'] | ansible.utils.ipaddr('network') }} {{ entry['source'] | ansible.utils.ipaddr('hostmask') }} {{ entry['destination'] }}
-{% endfor %}

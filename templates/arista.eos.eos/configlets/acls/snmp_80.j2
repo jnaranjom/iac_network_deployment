@@ -1,8 +1,0 @@
-{% for acl in acls %}
-{% if acl['name'] == 'snmp_80' and acl['version'] == '0.0.1' %}
-ip access-list extended {{ acl['name'] }}
-{% for entry in acl['entries'] %}
-    {{ loop.index * 5 }} {{ entry['action'] }} {{ entry['protocol'] }} {{ entry['source'] | ansible.utils.ipaddr('network') }} {{ entry['source'] | ansible.utils.ipaddr('hostmask') }}  {{ entry['destination'] }}
-{% endfor %}
-{% endif %}
-{% endfor %}

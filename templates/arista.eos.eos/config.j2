@@ -1,9 +1,0 @@
-hostname {{ inventory_hostname }}
-
-{% include 'configlets/acls/mgmt.j2' %}
-
-{% include 'configlets/acls/snmp_80.j2' %}
-
-{% include 'configlets/acls/snmp_81.j2' %}
-
-{% include 'configlets/services/ntp.j2' %}

@@ -1,6 +1,0 @@
-{% for protocol in protocols %}
-{% if protocol['name'] == 'ospf' %}
- ip ospf {{ protocol['attributes']['process_id'] }} area {{ protocol['attributes']['area'] }}
- mpls ip
-{% endif %}
-{% endfor %}

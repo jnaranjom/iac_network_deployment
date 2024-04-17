@@ -1,0 +1,12 @@
+
+---
+- name: "PLAY - USE INVENTORY PLUGIN"
+  hosts: "all"
+  gather_facts: false
+
+  tasks:
+    - name: "10: RENDER DEVICE CONFIGURATION"
+      ansible.builtin.template:
+        src: "templates/cisco/config.j2"
+        dest: "configs/cisco/{{ inventory_hostname }}.cfg"
+      delegate_to: "localhost"
