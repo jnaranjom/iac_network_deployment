@@ -5,8 +5,16 @@
   gather_facts: false
 
   tasks:
-    - name: "10: RENDER DEVICE CONFIGURATION"
+    - name: "10: DEBUG CONFIGURATION"
+      ansible.builtin.debug:
+        msg: "{{ hostvars [inventory_hostname] }}"
+
+    - name: "20: RENDER DEVICE CONFIGURATION"
       ansible.builtin.template:
         src: "templates/cisco/config.j2"
         dest: "configs/cisco/{{ inventory_hostname }}.cfg"
       delegate_to: "localhost"
+
+    - name: "30: APPLY CONFIG TO DEVICES"
+      cisco.ios.ios_config:
+        src: "configs/cisco/{{ inventory_hostname }}.cfg"

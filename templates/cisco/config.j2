@@ -1,8 +1,13 @@
 {% for interface in interfaces %}
 interface {{ interface['name'] }}
- description {{ interface['description'] }}
+  description {{ interface['description'] }}
 {% if interface['ip_addresses'] | length > 0 %}
   ip address {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }} {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('netmask') }}
+{% endif %}
+{% if not interface['enabled'] %}
+  shutdown
+{% else %}
+  no shutdown
 {% endif %}
 !
 {% endfor %}

@@ -6,18 +6,6 @@ api_endpoint: "http://192.168.2.201:9000"
 token: "531c20c8fb27b2d60f6f8608fabec819437adfa5"
 validate_certs: False
 
-# query:
-#   devices:
-#     name:
-#     serial:
-#     role:
-#       name:
-#     interfaces:
-#       name:
-#       ip_addresses: address
-#     config_context:
-
-
 query:
   devices:
     name:
@@ -51,14 +39,6 @@ query:
         name:
       export_targets:
         name:
-
-
-
-
-
-
-
-
 
 group_by:
   - role.name
