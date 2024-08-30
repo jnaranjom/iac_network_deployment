@@ -1,0 +1,9 @@
+{% for interface in interfaces %}
+interface {{ interface['name'] }}
+{% if ("switch" in role.name) and (interface['mgmt_only']) %}
+  no switchport
+{% endif %}
+  description {{ interface['description'] }}
+  ip address {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }} {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('netmask') }}
+  no shutdown
+{% endfor %}

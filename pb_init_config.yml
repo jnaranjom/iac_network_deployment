@@ -1,0 +1,18 @@
+---
+- name: "PLAY - USE INVENTORY PLUGIN"
+  hosts: "Campus, Branch, DataCenter"
+  gather_facts: false
+
+  tasks:
+    - name: "10: BUILD INIT CONFIG"
+      ansible.builtin.template:
+        src: "templates/{{ platform.name }}/init.j2"
+        dest: "configlets/{{ inventory_hostname }}.cfg"
+      delegate_to: localhost
+
+    # - name: "20: INCLUDE TASK TO CHECK ACCESS"
+    #   ansible.builtin.include_tasks: "tasks/task.{{ ansible_network_os }}.yml"
+
+    # - name: "30: DEBUG RESULT"
+    #   ansible.builtin.debug:
+    #     msg: "{{ ansible_network_resources }}"

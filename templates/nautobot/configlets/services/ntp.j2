@@ -1,7 +1,0 @@
-{% for server in attributes['config_context']['ntp']['servers'] %}
-{% if server['preferred'] %}
-ntp server {{ server['ip'] }} prefer
-{% else %}
-ntp server {{ server['ip'] }}
-{% endif %}
-{% endfor %}

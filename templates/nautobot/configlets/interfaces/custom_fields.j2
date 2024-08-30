@@ -1,6 +1,0 @@
-{% if interface['cf_ospf']  %}
-  ip ospf {{ attributes['config_context']['ospf']['process_id'] }} area {{ attributes['config_context']['ospf']['area'] }}
-{% endif %}
-{% if interface['cf_mpls']  %}
-  mpls ip
-{% endif -%}

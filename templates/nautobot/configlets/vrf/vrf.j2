@@ -1,7 +1,0 @@
-{% for vrf in attributes['vrfs'] %}
-ip vrf {{ vrf['name'] }}
-  rd {{ vrf['rd'] }}
-  route-target import {{ vrf['import_targets'][0]['name'] }}
-  route-target export {{ vrf['export_targets'][0]['name'] }}
-!
-{% endfor %}

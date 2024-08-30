@@ -1,9 +1,0 @@
-{% if attributes['bgp_routing_instances'][0] is defined %}
-router bgp {{ attributes['bgp_routing_instances'][0]['autonomous_system']['asn'] }}
-{% for interface in attributes['interfaces'] %}
-{% if interface['name'] == "Loopback0" %}
-  bgp router-id {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }}
-{% endif %}
-{% endfor %}
-  redistribute ospf {{ attributes['config_context']['ospf']['process_id'] }}
-{% endif %}
