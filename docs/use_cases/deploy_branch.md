@@ -44,3 +44,30 @@ Automation solution to deploy configuration for new branches
 ## Output
 
 New devices get set in the proper location, with a dynamically allocated IP assigned and an init configuration set on the device for remote mgmt
+
+
+## Requirements to deploy a branch:
+
+1. Create Site
+2. Create ASN for site
+3. Create new prefixes for the site
+    - Associate VLAN to prefix
+4. Associate VLANs to the site
+5. Create new devices in the site:
+    - Define role, location, status
+6. Run the `SET MGMT IP` Job to setup management on the device im Nautobot
+7. Run the `Deploy Small Branch` Job to setup the branch attributes
+8. Deploy init config to the devices `pb_init_config.yml`
+9. Deploy full config to the devices once these are online `pb_render_config.yml`
+
+## Remove branch configuration from devices
+
+1. Disconnect cable between branch router and ISP router
+2. Disconnect cable between branch router and switch
+3. Restore interface status to `Planned`
+4. Remove IP addresses from Router and ISP router
+5. Remove mode on switch interfaces
+6. Delete `wan:p2p` addresses
+7. Delete Default Gateway IPs from site prefixes
+8. Delete BGP peering for the site
+9. Delete routing instance for the router

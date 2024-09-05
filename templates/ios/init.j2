@@ -9,17 +9,9 @@ crypto key generate rsa modulus 2048
 !
 ip ssh version 2
 !
+{% include 'init_interfaces.j2' %}
+!
 line vty 0 4
   login local
   transport input ssh
-!
-{% if "switch" in role.name %}
-{% include ['switch_interfaces.j2', 'switch_vlans.j2'] %}
-{% elif "router" in role.name%}
-{% include 'router_interfaces.j2' %}
-{% endif %}
-!
-{% if bgp is defined and bgp | length > 0 %}
-{% include 'bgp.j2' %}
-{% endif %}
 !

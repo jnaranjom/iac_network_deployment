@@ -36,6 +36,8 @@ query:
       vlans:
         name:
         vid:
+      prefixes:
+        prefix:
 
 group_by:
   - location.name

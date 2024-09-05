@@ -1,6 +1,10 @@
 !
 router bgp {{ bgp['bgp_routing_instances'][0]['autonomous_system']['asn'] }}
-  redistribute connected
+{% if role.name in ['branch:edge:router'] %}
+{% for prefix in location['prefixes'] %}
+  network {{ prefix['prefix'] | ansible.utils.ipaddr('network') }} mask {{ prefix['prefix'] | ansible.utils.ipaddr('netmask') }}
+{% endfor %}
+{% endif %}
 {% for peering in bgp['bgp_peerings'] %}
 {% for neighbor in peering['endpoints'] %}
 {% if not inventory_hostname in neighbor['peer']['routing_instance']['device']['name'] %}
