@@ -1,0 +1,22 @@
+!
+{% for interface in interfaces %}
+interface {{ interface['name'] }}
+{% if ("switch" in role.name) and (interface['mgmt_only']) %}
+  no switchport
+{% endif %}
+  description {{ interface['cpf_auto_description'] }}
+{% if interface['ip_addresses'] | length > 0 %}
+  ip address {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }} {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('netmask') }}
+{% endif %}
+{% if interface['mode'] == 'TAGGED' %}
+  switchport trunk encapsulation dot1q
+  switchport mode trunk
+  switchport trunk allowed vlan all
+{% endif %}
+{% if interface['mode'] == 'ACCESS' %}
+  switchport mode access
+  switchport access vlan {{ interface['untagged_vlan']['vid'] }}
+{% endif %}
+  no shutdown
+!
+{% endfor %}

@@ -19,13 +19,18 @@ query:
     tenant:
       name:
     interfaces:
-      filters:
-        mgmt_only: true
       name:
       description:
+      cpf_auto_description:
       ip_addresses:
         address:
       mgmt_only:
+      enabled:
+      mode:
+      untagged_vlan:
+        vid:
+      tagged_vlans:
+        vid:
     location:
       name:
       vlans:

@@ -1,9 +1,13 @@
+!
 {% for interface in interfaces %}
 interface {{ interface['name'] }}
-{% if ("switch" in role.name) and (interface['mgmt_only']) %}
-  no switchport
+  description {{ interface['cpf_auto_description'] }}
+{% if '.' in interface['name'] %}
+  encapsulation dot1q {{ interface['name'] | split('.') | last }}
 {% endif %}
-  description {{ interface['description'] }}
+{% if interface['ip_addresses'] | length > 0 %}
   ip address {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }} {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('netmask') }}
+{% endif %}
   no shutdown
+!
 {% endfor %}
