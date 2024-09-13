@@ -1,6 +1,33 @@
 ---
 - name: "PLAY - USE INVENTORY PLUGIN"
-  hosts: "Branch, ISP"
+  hosts: "localhost"
+  gather_facts: false
+
+  vars:
+    local_serial_number: "{{ serial_number }}"
+
+  tasks:
+    - name: "FIND HOSTNAME"
+      ansible.builtin.debug:
+        msg: "{{ local_serial_number }}"
+
+    - name: "FIND HOSTNAME FROM SERIAL NUMBER"
+      ansible.builtin.set_fact:
+        devices:
+          hostvars: "{{ hostvars }}"
+
+    - name: "FIND SJON QUERY"
+      ansible.builtin.set_fact:
+        device: "{{ devices | community.general.json_query(set_query) }}"
+      vars:
+        set_query: "to_array(hostvars.*)[?serial_number == '{{ local_serial_number }}'].inventory_hostname | [0]"
+
+    - name: "DEBUG HOSTNAME"
+      ansible.builtin.debug:
+        msg: "{{ device }}"
+
+- name: "PLAY - USE INVENTORY PLUGIN"
+  hosts: "{{ hostvars['localhost']['device'] }}"
   gather_facts: false
 
   tasks:
@@ -17,4 +44,5 @@
     - name: "APPLY CONFIG IOL DEVICES"
       cisco.ios.ios_config:
         src: "templates/{{ platform.name }}/{{ platform.name }}.j2"
+        replace: block
       when: ( platform.name == "ios" )

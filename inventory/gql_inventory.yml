@@ -10,6 +10,7 @@ validate_certs: false
 query:
   devices:
     name:
+    "serial_number: serial":
     role:
       name:
     platform:
@@ -38,6 +39,7 @@ query:
         vid:
       prefixes:
         prefix:
+    config_context:
 
 group_by:
   - location.name

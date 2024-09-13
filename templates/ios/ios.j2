@@ -20,7 +20,11 @@ ip ssh version 2
 {% include 'bgp.j2' %}
 {% endif %}
 !
+{% include 'syslog.j2' %}
+!
 line vty 0 4
   login local
   transport input ssh
+!
+{% include 'ntp.j2' %}
 !
