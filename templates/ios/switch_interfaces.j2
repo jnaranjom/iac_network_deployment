@@ -4,7 +4,9 @@ interface {{ interface['name'] }}
 {% if ("switch" in role.name) and (interface['mgmt_only']) %}
   no switchport
 {% endif %}
+{%if interface['cpf_auto_description'] != "None" %}
   description {{ interface['cpf_auto_description'] }}
+{% endif %}
 {% if interface['ip_addresses'] | length > 0 %}
   ip address {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('address') }} {{ interface['ip_addresses'][0]['address'] | ansible.utils.ipaddr('netmask') }}
 {% endif %}

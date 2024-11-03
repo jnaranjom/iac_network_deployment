@@ -1,7 +1,9 @@
 !
 {% for interface in interfaces %}
 interface {{ interface['name'] }}
+{%if interface['cpf_auto_description'] != "None" %}
  description {{ interface['cpf_auto_description'] }}
+{% endif %}
 {% if '.' in interface['name'] %}
  encapsulation dot1q {{ interface['name'] | split('.') | last }}
 {% endif %}

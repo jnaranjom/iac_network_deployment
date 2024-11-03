@@ -1,4 +1,5 @@
 !
+{% if bgp['bgp_routing_instances'][0] is defined %}
 router bgp {{ bgp['bgp_routing_instances'][0]['autonomous_system']['asn'] }}
 {% if role.name in ['branch:edge:router'] %}
 {% for prefix in location['prefixes'] %}
@@ -13,3 +14,4 @@ router bgp {{ bgp['bgp_routing_instances'][0]['autonomous_system']['asn'] }}
 {% endif %}
 {% endfor %}
 {% endfor %}
+{% endif %}
