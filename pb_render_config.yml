@@ -17,10 +17,10 @@
     - name: "APPLY CONFIG IOL DEVICES"
       napalm.napalm.napalm_install_config:
         config_file: "configs/{{ inventory_hostname }}.cfg"
-        commit_changes: True
-        replace_config: True
+        commit_changes: true
+        replace_config: true
         dev_os: "{{ platform.name }}"
-        get_diffs: True
+        get_diffs: true
         optional_args:
           dest_file_system: "unix:"
-      when: ( platform.name == "ios" )
+      when: (platform.name == "ios")

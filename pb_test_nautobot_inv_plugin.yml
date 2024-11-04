@@ -1,9 +1,0 @@
----
-- name: "PLAY - USE INVENTORY PLUGIN"
-  hosts: "all"
-  gather_facts: false
-
-  tasks:
-    - name: "10: DEBUG CONFIGURATION"
-      ansible.builtin.debug:
-        msg: "{{ hostvars [inventory_hostname]['config_context']['syslog'] }}"

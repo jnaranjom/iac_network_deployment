@@ -16,10 +16,10 @@
     body:
       query: "{{ query_string }}"
       variables:
-          {
-            "device_name": "{{ inventory_hostname }}"
-          }
-    validate_certs: no
+        {
+          "device_name": "{{ inventory_hostname }}"
+        }
+    validate_certs: false
   delegate_to: localhost
   register: result
   vars:
