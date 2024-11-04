@@ -1,4 +1,0 @@
----
-- name: "20: CHECK DEVICE ACCESS || CISCO"
-  cisco.ios.ios_facts:
-    gather_network_resources: l2_interfaces
