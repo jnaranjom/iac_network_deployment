@@ -163,6 +163,7 @@ cython_debug/
 # Output config files
 
 output/*
+configs/*
 
 # Ignore roles
 

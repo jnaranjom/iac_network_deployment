@@ -1,0 +1,24 @@
+query ($device_name: [String]) {
+  bgp_routing_instances (device: $device_name){
+    autonomous_system{
+      asn
+    }
+  }
+  bgp_peerings (device: $device_name) {
+    endpoints{
+      peer{
+        source_ip{
+          address
+        }
+        routing_instance {
+          device {
+            name
+          }
+          autonomous_system{
+            asn
+          }
+        }
+      }
+    }
+  }
+}

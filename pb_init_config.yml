@@ -1,0 +1,11 @@
+---
+- name: "PLAY - USE INVENTORY PLUGIN"
+  hosts: "ios"
+  gather_facts: false
+
+  tasks:
+    - name: "10: BUILD INIT CONFIG"
+      ansible.builtin.template:
+        src: "templates/{{ platform.name }}/init.j2"
+        dest: "configs/{{ inventory_hostname }}_init.cfg"
+      delegate_to: localhost

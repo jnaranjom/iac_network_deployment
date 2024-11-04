@@ -1,0 +1,18 @@
+!
+username admin privilege 15 role network-admin secret admin
+!
+hostname {{ inventory_hostname }}
+!
+management api http-commands
+  no shutdown
+!
+{% include 'interfaces.j2' %}
+!
+service routing protocols model multi-agent
+!
+lldp run
+!
+exit
+!
+wr mem
+!

@@ -1,0 +1,5 @@
+---
+- name: "20: CHECK DEVICE ACCESS || ARISTA"
+  arista.eos.eos_facts:
+    gather_network_resources: l2_interfaces
+  become: true

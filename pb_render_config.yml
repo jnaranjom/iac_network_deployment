@@ -1,0 +1,26 @@
+---
+- name: "PLAY - USE INVENTORY PLUGIN"
+  hosts: "hou-br01, dal-br01, dal-br02, usa-isp-rtr01"
+  gather_facts: false
+
+  tasks:
+    - name: "5: INCLUDE TASK TO GET BGP SETTINGS"
+      ansible.builtin.include_tasks: "tasks/task.get_device_attributes.yml"
+      when: role.name | split(':') | last == 'router'
+
+    - name: "10: BUILD INIT CONFIG"
+      ansible.builtin.template:
+        src: "templates/{{ platform.name }}/{{ platform.name }}.j2"
+        dest: "configs/{{ inventory_hostname }}.cfg"
+      delegate_to: localhost
+
+    - name: "APPLY CONFIG IOL DEVICES"
+      napalm.napalm.napalm_install_config:
+        config_file: "configs/{{ inventory_hostname }}.cfg"
+        commit_changes: true
+        replace_config: true
+        dev_os: "{{ platform.name }}"
+        get_diffs: true
+        optional_args:
+          dest_file_system: "unix:"
+      when: (platform.name == "ios")

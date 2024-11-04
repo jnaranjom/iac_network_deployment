@@ -1,0 +1,192 @@
+[
+    {
+        "name": "chi-bld01",
+        "description": "CHI-BLD01",
+        "address": "",
+        "parent": "Chicago",
+        "location_type": "Building",
+        "tenant": "Campus",
+        "status": "Active",
+        "zip_code": "21550"
+    },
+    {
+        "name": "chi-bld02",
+        "description": "CHI-BLD02",
+        "address": "",
+        "parent": "Chicago",
+        "location_type": "Building",
+        "tenant": "Campus",
+        "status": "Staging",
+        "zip_code": "68460"
+    },
+    {
+        "name": "Chicago",
+        "description": "CHICAGO",
+        "address": "",
+        "parent": "Illinois",
+        "location_type": "City",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    },
+    {
+        "name": "dal-br01",
+        "description": "DAL-BR01",
+        "address": "",
+        "parent": "Dallas",
+        "location_type": "Branch",
+        "tenant": "Branch",
+        "status": "Active",
+        "zip_code": "89391"
+    },
+    {
+        "name": "dal-br02",
+        "description": "DAL-BR02",
+        "address": "",
+        "parent": "Dallas",
+        "location_type": "Branch",
+        "tenant": "Branch",
+        "status": "Active",
+        "zip_code": "56551"
+    },
+    {
+        "name": "dal-br03",
+        "description": "DAL-BR03",
+        "address": "",
+        "parent": "Dallas",
+        "location_type": "Branch",
+        "tenant": "Branch",
+        "status": "Staging",
+        "zip_code": "63283"
+    },
+    {
+        "name": "dal-br04",
+        "description": "DAL-BR04",
+        "address": "",
+        "parent": "Dallas",
+        "location_type": "Branch",
+        "tenant": "Branch",
+        "status": "Staging",
+        "zip_code": "36448"
+    },
+    {
+        "name": "Dallas",
+        "description": "DALLAS",
+        "address": "",
+        "parent": "Texas",
+        "location_type": "City",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    },
+    {
+        "name": "fabric_01",
+        "description": "FABRIC_01",
+        "address": "",
+        "parent": "mia-dc01",
+        "location_type": "Fabric",
+        "tenant": "DataCenter",
+        "status": "Staging",
+        "zip_code": "10061"
+    },
+    {
+        "name": "fabric_02",
+        "description": "FABRIC_02",
+        "address": "",
+        "parent": "mia-dc01",
+        "location_type": "Fabric",
+        "tenant": "DataCenter",
+        "status": "Staging",
+        "zip_code": "77098"
+    },
+    {
+        "name": "Florida",
+        "description": "FLORIDA",
+        "address": "",
+        "parent": "USA",
+        "location_type": "State",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    },
+    {
+        "name": "hou-br01",
+        "description": "HOU-BR01",
+        "address": "",
+        "parent": "Houston",
+        "location_type": "Branch",
+        "tenant": "Branch",
+        "status": "Active",
+        "zip_code": "10442"
+    },
+    {
+        "name": "hou-br02",
+        "description": "HOU-BR02",
+        "address": "",
+        "parent": "Houston",
+        "location_type": "Branch",
+        "tenant": "Branch",
+        "status": "Active",
+        "zip_code": "50396"
+    },
+    {
+        "name": "Houston",
+        "description": "HOUSTON",
+        "address": "",
+        "parent": "Texas",
+        "location_type": "City",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    },
+    {
+        "name": "Illinois",
+        "description": "ILLINOIS",
+        "address": "",
+        "parent": "USA",
+        "location_type": "State",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    },
+    {
+        "name": "mia-dc01",
+        "description": "MIA-DC01",
+        "address": "",
+        "parent": "Miami",
+        "location_type": "DataCenter",
+        "tenant": "DataCenter",
+        "status": "Active",
+        "zip_code": "72654"
+    },
+    {
+        "name": "Miami",
+        "description": "MIAMI",
+        "address": "",
+        "parent": "Florida",
+        "location_type": "City",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    },
+    {
+        "name": "Texas",
+        "description": "TEXAS",
+        "address": "",
+        "parent": "USA",
+        "location_type": "State",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    },
+    {
+        "name": "USA",
+        "description": "USA",
+        "address": "",
+        "parent": "NoObject",
+        "location_type": "Country",
+        "tenant": "NoObject",
+        "status": "Active",
+        "zip_code": ""
+    }
+]

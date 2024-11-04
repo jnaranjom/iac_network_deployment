@@ -1,3 +1,6 @@
 ---
 collections:
   - name: napalm.napalm
+  - name: networktocode.nautobot
+  - name: cisco.ios
+  - name: arista.eos
