@@ -1,14 +1,89 @@
 !
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
 hostname {{ inventory_hostname }}
 !
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+clock timezone CST -6 0
+{% if "router" in role.name %}
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+{% endif %}
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
 ip domain name network.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+archive
+ log config
+  logging enable
+  notify syslog contenttype plaintext
+  hidekeys
+ path unix:/archive
+ write-memory
+!
+{% if "switch" in role.name %}
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+{% endif %}
 !
 username admin privilege 15 secret admin
 !
-crypto key generate rsa modulus 2048
+{% if "router" in role.name %}
+redundancy
+{% endif %}
+!
 !
 ip ssh version 2
+ip scp server enable
 !
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
 {% if "switch" in role.name %}
 {% include 'switch_vlans.j2' %}
 {% include 'switch_interfaces.j2' %}
@@ -20,11 +95,32 @@ ip ssh version 2
 {% include 'bgp.j2' %}
 {% endif %}
 !
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
 {% include 'syslog.j2' %}
 !
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
 line vty 0 4
-  login local
-  transport input ssh
+ login local
+ transport input ssh
 !
 {% include 'ntp.j2' %}
 !
+end

@@ -1,6 +1,6 @@
 ---
 - name: "PLAY - USE INVENTORY PLUGIN"
-  hosts: "Branch, ISP"
+  hosts: "ios"
   gather_facts: false
 
   tasks:

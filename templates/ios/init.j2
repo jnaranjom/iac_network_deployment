@@ -15,3 +15,9 @@ line vty 0 4
   login local
   transport input ssh
 !
+ip scp server enable
+!
+archive
+  path unix:archive
+  write-memory
+!
