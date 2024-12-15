@@ -1,0 +1,9 @@
+---
+- name: "PB TEST SEMAPHORE"
+  hosts: "localhost"
+  gather_facts: false
+
+  tasks:
+    - name: "DEBUG SOMETHING HERE"
+      ansible.builtin.debug:
+        msg: "HELLO FROM SEMAPHORE"
