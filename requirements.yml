@@ -4,3 +4,6 @@ collections:
   - name: networktocode.nautobot
   - name: cisco.ios
   - name: arista.eos
+
+dependencies:
+  - netutils
