@@ -1,6 +1,6 @@
 ---
 - name: "PLAY - USE INVENTORY PLUGIN"
-  hosts: "{{ devices }}"
+  hosts: "dal-br01-rtr01"
   gather_facts: false
 
   tasks:
