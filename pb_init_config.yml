@@ -1,6 +1,6 @@
 ---
 - name: "PLAY - USE INVENTORY PLUGIN"
-  hosts: "ios"
+  hosts: "{{ device }}"
   gather_facts: false
 
   tasks:
