@@ -10,4 +10,4 @@
 
     - name: "DEBUG 2: FROM SEMAPHORE"
       ansible.builtin.debug:
-        msg: ADDED NEW TASK"
+        msg: "ADDED NEW TASK"
