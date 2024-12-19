@@ -4,6 +4,10 @@
   gather_facts: false
 
   tasks:
-    - name: "DEBUG SOMETHING HERE"
+    - name: "DEBUG 1: FROM SEMAPHORE"
       ansible.builtin.debug:
-        msg: "HELLO FROM SEMAPHORE"
+        msg: "PLAYBOOK RUNNING FINE"
+
+    - name: "DEBUG 2: FROM SEMAPHORE"
+      ansible.builtin.debug:
+        msg: ADDED NEW TASK"
